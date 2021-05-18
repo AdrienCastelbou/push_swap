@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/18 12:26:02 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:16:13 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,18 +131,72 @@ int		check_argvs(t_stacks *stacks, char **av)
 		if (ret == 0)
 			break ;
 	}
-	t_list *elem;
-	elem = stacks->a;
-	if (!ret)
-		return (ret);
-	while (elem)
-	{
-		printf("|%d|\n", elem->nb);
-		elem = elem->next;
-	}
-	//if (ret == 0)
+	if (ret == 0)
 		ft_stacksclear(stacks);
 	return (ret);
+}
+
+void	ft_sb(t_list *b)
+{
+	int	temp;
+
+	if (!b || !b->next)
+		return ;
+	temp = b->nb;
+	b->nb = b->next->nb;
+	b->next->nb = temp;
+	printf("sb\n");
+}
+
+void	ft_sa(t_list *a)
+{
+	int	temp;
+
+	if (!a || !a->next)
+		return ;
+	temp = a->nb;
+	a->nb = a->next->nb;
+	a->next->nb = temp;
+	printf("sa\n");
+}
+
+void	ft_ss(t_stacks *stacks)
+{
+	ft_sa(stacks->a);
+	ft_sb(stacks->b);
+	printf("ss\n");
+}
+
+void	ft_pb(t_stacks *stacks)
+{
+	t_list	*elem;
+	if (!stacks->a)
+		return ;
+	elem = stacks->a->next;
+	ft_lstadd_front(&stacks->b, stacks->a);
+	stacks->a = elem;
+	printf("pb\n");
+}
+
+void	ft_pa(t_stacks *stacks)
+{
+	t_list	*elem;
+	if (!stacks->b)
+		return ;
+	elem = stacks->b->next;
+	ft_lstadd_front(&stacks->a, stacks->b);
+	stacks->b = elem;
+	printf("pa\n");
+}
+
+void	ft_show_stack(t_list *lst)
+{
+	while (lst)
+	{
+		printf("%d\n", lst->nb);
+		lst = lst->next;
+	}
+	printf("---\n");
 }
 
 int		main(int ac, char **argv)
@@ -162,4 +216,9 @@ int		main(int ac, char **argv)
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
+	ft_show_stack(stacks->a);
+	ft_pb(stacks);
+ft_pa(stacks);
+	ft_show_stack(stacks->a);
+	ft_show_stack(stacks->b);
 }
