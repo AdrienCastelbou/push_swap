@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/18 12:10:39 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/18 12:26:02 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ int		get_av_elem(t_stacks *stacks, char *str)
 		if (!(elem = ft_lstnew(nb)))
 			return (0);
 		ft_lstadd_back(&(stacks->a), elem);
-		while (str[i] && (ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-'))
+		while (str[i] && (str[i] == '+' || str[i] == '-'))
+			i++;
+		while (str[i] && (ft_isdigit(str[i])))
 			i++;
 	}
 	return (1);
