@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 16:45:31 by acastelb          #+#    #+#             */
-/*   Updated: 2020/11/19 12:35:54 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/18 10:45:28 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct	s_list
 {
-	void			*content;
+	int				nb;
 	struct s_list	*next;
 }				t_list;
 
