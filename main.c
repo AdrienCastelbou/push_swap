@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/18 14:16:13 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:44:12 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void	ft_sb(t_list *b)
 	temp = b->nb;
 	b->nb = b->next->nb;
 	b->next->nb = temp;
-	printf("sb\n");
 }
 
 void	ft_sa(t_list *a)
@@ -157,14 +156,12 @@ void	ft_sa(t_list *a)
 	temp = a->nb;
 	a->nb = a->next->nb;
 	a->next->nb = temp;
-	printf("sa\n");
 }
 
 void	ft_ss(t_stacks *stacks)
 {
 	ft_sa(stacks->a);
 	ft_sb(stacks->b);
-	printf("ss\n");
 }
 
 void	ft_pb(t_stacks *stacks)
@@ -175,7 +172,6 @@ void	ft_pb(t_stacks *stacks)
 	elem = stacks->a->next;
 	ft_lstadd_front(&stacks->b, stacks->a);
 	stacks->a = elem;
-	printf("pb\n");
 }
 
 void	ft_pa(t_stacks *stacks)
@@ -186,7 +182,72 @@ void	ft_pa(t_stacks *stacks)
 	elem = stacks->b->next;
 	ft_lstadd_front(&stacks->a, stacks->b);
 	stacks->b = elem;
-	printf("pa\n");
+}
+
+void	ft_ra(t_stacks *stacks)
+{
+	t_list *elem;
+
+	if (!stacks->a || !stacks->a->next)
+		return ;
+	elem = stacks->a;
+	stacks->a = elem->next;
+	elem->next = NULL;
+	ft_lstadd_back(&stacks->a, elem);
+}
+
+void	ft_rb(t_stacks *stacks)
+{
+	t_list *elem;
+
+	if (!stacks->b || !stacks->b->next)
+		return ;
+	elem = stacks->b;
+	stacks->b = elem->next;
+	elem->next = NULL;
+	ft_lstadd_back(&stacks->b, elem);
+}
+
+void	ft_rr(t_stacks *stacks)
+{
+	ft_ra(stacks);
+	ft_rb(stacks);
+}
+
+void	ft_rra(t_stacks *stacks)
+{
+	t_list	*last;
+	t_list	*elem;
+
+	if (!stacks->a || !stacks->a->next)
+		return ;
+	elem = stacks->a;
+	while (elem->next->next)
+		elem = elem->next;
+	last = elem->next;
+	elem->next = NULL;
+	ft_lstadd_front(&stacks->a, last);
+}
+
+void	ft_rrb(t_stacks *stacks)
+{
+	t_list	*last;
+	t_list	*elem;
+
+	if (!stacks->b || !stacks->b->next)
+		return ;
+	elem = stacks->b;
+	while (elem->next->next)
+		elem = elem->next;
+	last = elem->next;
+	elem->next = NULL;
+	ft_lstadd_front(&stacks->b, last);
+}
+
+void	ft_rrr(t_stacks *stacks)
+{
+	ft_rrb(stacks);
+	ft_rra(stacks);
 }
 
 void	ft_show_stack(t_list *lst)
@@ -218,7 +279,9 @@ int		main(int ac, char **argv)
 	}
 	ft_show_stack(stacks->a);
 	ft_pb(stacks);
-ft_pa(stacks);
+	ft_pb(stacks);
+	ft_rrr(stacks);
 	ft_show_stack(stacks->a);
 	ft_show_stack(stacks->b);
+
 }
