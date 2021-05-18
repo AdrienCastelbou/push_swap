@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 14:36:32 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/18 10:47:02 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:48:49 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		return ;
 	while (lst)
 	{
-		f(lst->nb);
+		f((void *)&(lst->nb));
 		lst = lst->next;
 	}
 }
