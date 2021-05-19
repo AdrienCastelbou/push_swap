@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/18 14:44:12 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:22:11 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,40 @@ void	ft_show_stack(t_list *lst)
 	printf("---\n");
 }
 
+void	less_or_egal_three(t_stacks *stacks)
+{
+	int		first;
+	int		middle;
+	int		last;
+
+	first = stacks->a->nb;
+	middle = stacks->a->next->nb;
+	last = ft_lstlast(stacks->a)->nb;
+	if (first < middle && middle <= last)
+		return ;
+	if (first < middle && middle > last && last > first) //1-3-2
+		ft_sa(stacks->a); // 3-1-2 
+	else if (first > middle && middle > last) // 3-2-1
+		ft_sa(stacks->a); //2-3-1
+	else if (middle == last || (first > middle && first < last)) // 2-1-3
+		ft_sa(stacks->a);
+	first = stacks->a->nb;
+	middle = stacks->a->next->nb;
+	last = ft_lstlast(stacks->a)->nb;
+	if (first > middle && first > last && middle < last) // 3-1-2
+		ft_ra(stacks);
+	else if (first < middle && first > last) // 2-3-1
+		ft_rra(stacks);
+}
+
+void	run_best_algo(t_stacks *stacks)
+{
+	if (stacks->size == 1)
+		return ;
+	else if (stacks->size <= 3)
+		return (less_or_egal_three(stacks));
+}
+
 int		main(int ac, char **argv)
 {
 	t_stacks	*stacks;
@@ -277,11 +311,9 @@ int		main(int ac, char **argv)
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
+	stacks->size = ft_lstsize(stacks->a);
 	ft_show_stack(stacks->a);
-	ft_pb(stacks);
-	ft_pb(stacks);
-	ft_rrr(stacks);
+	run_best_algo(stacks);
 	ft_show_stack(stacks->a);
-	ft_show_stack(stacks->b);
-
+	ft_stacksclear(stacks);
 }
