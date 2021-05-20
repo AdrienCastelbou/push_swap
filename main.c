@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/19 15:22:11 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/20 09:33:41 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	ft_stacksclear(t_stacks *stacks)
 {
 	if (!stacks)
 		return ;
-	ft_lstclear(&(stacks->a), free);
-	ft_lstclear(&(stacks->b), free);
+	ft_dlstclear(&(stacks->a), free);
+	ft_dlstclear(&(stacks->b), free);
 	free(stacks);
 	stacks = NULL;
 }
 
-int		nb_is_duplicate(t_list *a, int nb)
+int		nb_is_duplicate(t_dlist *a, int nb)
 {
 	while (a)
 	{
@@ -86,7 +86,7 @@ int		is_numeric_value(char *str)
 
 int		get_av_elem(t_stacks *stacks, char *str)
 {
-	t_list		*elem;
+	t_dlist		*elem;
 	long int	nb;
 	int			i;
 
@@ -107,9 +107,9 @@ int		get_av_elem(t_stacks *stacks, char *str)
 		nb = ft_atoli(str + i);
 		if (nb < INT_MIN || nb > INT_MAX || nb_is_duplicate(stacks->a, nb))
 			return (0);
-		if (!(elem = ft_lstnew(nb)))
+		if (!(elem = ft_dlstnew(nb)))
 			return (0);
-		ft_lstadd_back(&(stacks->a), elem);
+		ft_dlstadd_back(&(stacks->a), elem);
 		while (str[i] && (str[i] == '+' || str[i] == '-'))
 			i++;
 		while (str[i] && (ft_isdigit(str[i])))
@@ -136,7 +136,7 @@ int		check_argvs(t_stacks *stacks, char **av)
 	return (ret);
 }
 
-void	ft_sb(t_list *b)
+void	ft_sb(t_dlist *b)
 {
 	int	temp;
 
@@ -147,7 +147,7 @@ void	ft_sb(t_list *b)
 	b->next->nb = temp;
 }
 
-void	ft_sa(t_list *a)
+void	ft_sa(t_dlist *a)
 {
 	int	temp;
 
@@ -166,46 +166,46 @@ void	ft_ss(t_stacks *stacks)
 
 void	ft_pb(t_stacks *stacks)
 {
-	t_list	*elem;
+	t_dlist	*elem;
 	if (!stacks->a)
 		return ;
 	elem = stacks->a->next;
-	ft_lstadd_front(&stacks->b, stacks->a);
+	ft_dlstadd_front(&stacks->b, stacks->a);
 	stacks->a = elem;
 }
 
 void	ft_pa(t_stacks *stacks)
 {
-	t_list	*elem;
+	t_dlist	*elem;
 	if (!stacks->b)
 		return ;
 	elem = stacks->b->next;
-	ft_lstadd_front(&stacks->a, stacks->b);
+	ft_dlstadd_front(&stacks->a, stacks->b);
 	stacks->b = elem;
 }
 
 void	ft_ra(t_stacks *stacks)
 {
-	t_list *elem;
+	t_dlist *elem;
 
 	if (!stacks->a || !stacks->a->next)
 		return ;
 	elem = stacks->a;
 	stacks->a = elem->next;
 	elem->next = NULL;
-	ft_lstadd_back(&stacks->a, elem);
+	ft_dlstadd_back(&stacks->a, elem);
 }
 
 void	ft_rb(t_stacks *stacks)
 {
-	t_list *elem;
+	t_dlist *elem;
 
 	if (!stacks->b || !stacks->b->next)
 		return ;
 	elem = stacks->b;
 	stacks->b = elem->next;
 	elem->next = NULL;
-	ft_lstadd_back(&stacks->b, elem);
+	ft_dlstadd_back(&stacks->b, elem);
 }
 
 void	ft_rr(t_stacks *stacks)
@@ -216,8 +216,8 @@ void	ft_rr(t_stacks *stacks)
 
 void	ft_rra(t_stacks *stacks)
 {
-	t_list	*last;
-	t_list	*elem;
+	t_dlist	*last;
+	t_dlist	*elem;
 
 	if (!stacks->a || !stacks->a->next)
 		return ;
@@ -226,13 +226,13 @@ void	ft_rra(t_stacks *stacks)
 		elem = elem->next;
 	last = elem->next;
 	elem->next = NULL;
-	ft_lstadd_front(&stacks->a, last);
+	ft_dlstadd_front(&stacks->a, last);
 }
 
 void	ft_rrb(t_stacks *stacks)
 {
-	t_list	*last;
-	t_list	*elem;
+	t_dlist	*last;
+	t_dlist	*elem;
 
 	if (!stacks->b || !stacks->b->next)
 		return ;
@@ -241,7 +241,7 @@ void	ft_rrb(t_stacks *stacks)
 		elem = elem->next;
 	last = elem->next;
 	elem->next = NULL;
-	ft_lstadd_front(&stacks->b, last);
+	ft_dlstadd_front(&stacks->b, last);
 }
 
 void	ft_rrr(t_stacks *stacks)
@@ -250,7 +250,7 @@ void	ft_rrr(t_stacks *stacks)
 	ft_rra(stacks);
 }
 
-void	ft_show_stack(t_list *lst)
+void	ft_show_stack(t_dlist *lst)
 {
 	while (lst)
 	{
@@ -268,7 +268,7 @@ void	less_or_egal_three(t_stacks *stacks)
 
 	first = stacks->a->nb;
 	middle = stacks->a->next->nb;
-	last = ft_lstlast(stacks->a)->nb;
+	last = ft_dlstlast(stacks->a)->nb;
 	if (first < middle && middle <= last)
 		return ;
 	if (first < middle && middle > last && last > first) //1-3-2
@@ -279,7 +279,7 @@ void	less_or_egal_three(t_stacks *stacks)
 		ft_sa(stacks->a);
 	first = stacks->a->nb;
 	middle = stacks->a->next->nb;
-	last = ft_lstlast(stacks->a)->nb;
+	last = ft_dlstlast(stacks->a)->nb;
 	if (first > middle && first > last && middle < last) // 3-1-2
 		ft_ra(stacks);
 	else if (first < middle && first > last) // 2-3-1
@@ -311,7 +311,7 @@ int		main(int ac, char **argv)
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
-	stacks->size = ft_lstsize(stacks->a);
+	stacks->size = ft_dlstsize(stacks->a);
 	ft_show_stack(stacks->a);
 	run_best_algo(stacks);
 	ft_show_stack(stacks->a);
