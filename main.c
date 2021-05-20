@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/20 09:33:41 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/20 09:55:50 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,61 @@ void	less_or_egal_three(t_stacks *stacks)
 	else if (first < middle && first > last) // 2-3-1
 		ft_rra(stacks);
 }
+void	swap(int *a, int *b)
+{
+	int c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+t_dlist	*partition(t_dlist *head, t_dlist *last)
+{
+	int		nb;
+	t_dlist	*i;
+	t_dlist	*j;
+
+	nb = last->nb;
+	i = head->prev;
+	j = head;
+	while (last != j)
+	{
+		if (j->nb < nb)
+		{
+			if (i)
+				i = i->next;
+			else
+				i = head;
+			swap(&(i->nb), &(j->nb));
+		}
+		j = j->next;
+	}
+	if (i)
+		i = i->next;
+	else
+		i = head;
+	swap(&(i->nb), &(last->nb));
+	return (i);
+}
+
+void	quick_sort(t_dlist *head, t_dlist *last)
+{
+	t_dlist	*pivot;
+
+	if (head == NULL || last == NULL || head == last->next)
+		return ;
+	pivot = partition(head, last);
+	quick_sort(head, pivot->prev);
+	quick_sort(pivot->next, last);
+}
+
+void	set_quick_sort(t_dlist *head)
+{
+	t_dlist	*last;
+
+	last = ft_dlstlast(head);
+	quick_sort(head, last);
+}
 
 void	run_best_algo(t_stacks *stacks)
 {
@@ -292,6 +347,8 @@ void	run_best_algo(t_stacks *stacks)
 		return ;
 	else if (stacks->size <= 3)
 		return (less_or_egal_three(stacks));
+	else
+		set_quick_sort(stacks->a);
 }
 
 int		main(int ac, char **argv)
