@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/20 09:55:50 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/21 11:05:11 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,7 +326,7 @@ void	quick_sort(t_dlist *head, t_dlist *last)
 {
 	t_dlist	*pivot;
 
-	if (head == NULL || last == NULL || head == last->next)
+	if (head == NULL || last == NULL || head == last || head == last->next)
 		return ;
 	pivot = partition(head, last);
 	quick_sort(head, pivot->prev);
