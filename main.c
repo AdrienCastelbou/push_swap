@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 16:50:09 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:55:42 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,4 +432,5 @@ int		main(int ac, char **argv)
 	set_lquick_sort(stacks);
 	//ft_show_stack(stacks->a);
 	ft_stacksclear(stacks);
+	return (0);
 }
