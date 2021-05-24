@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 16:14:50 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:18:33 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,16 +293,13 @@ void	less_or_egal_three(t_stacks *stacks)
 		ft_rra(stacks);
 }
 
-t_dlist *a_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **n_last)
+t_dlist *a_partition(t_stacks *stacks, t_dlist *head, t_dlist *last, t_dlist **n_last)
 {
-	t_dlist	*n_head;
-
 	if (!head || !last)
 		return (NULL);
-	n_head = NULL;
-	if (stacks->a != *head)
+	if (stacks->a != head)
 	{
-		while (stacks->a != *head)
+		while (stacks->a != head)
 			ft_pb(stacks);
 	}
 	while (stacks->a != last)
@@ -311,28 +308,20 @@ t_dlist *a_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **
 			ft_pb(stacks);
 		else
 		{
-			if (!n_head)
-				n_head = stacks->a;
 			*n_last = stacks->a;
 			ft_ra(stacks);
 		}
 	}
-	if (!n_head)
-		n_head = stacks->a;
-	*head = n_head;
 	return (last);
 }
 
-t_dlist *b_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **n_last)
+t_dlist *b_partition(t_stacks *stacks, t_dlist *head, t_dlist *last, t_dlist **n_last)
 {
-	t_dlist	*n_head;
-
-	n_head = NULL;
-	if (!head || !*head || !last)
+	if (!head || !head || !last)
 		return (NULL);
-	if (stacks->b != *head)
+	if (stacks->b != head)
 	{
-		while (stacks->b && stacks->b != *head)
+		while (stacks->b && stacks->b != head)
 			ft_pa(stacks);
 	}
 	while (stacks->b && stacks->b != last)
@@ -341,15 +330,10 @@ t_dlist *b_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **
 			ft_pa(stacks);
 		else
 		{
-			if (!n_head)
-				n_head = stacks->b;
 			*n_last = stacks->b;
 			ft_rb(stacks);
 		}
 	}
-	if (!n_head)
-		n_head = stacks->b;
-	*head = n_head;
 	return (last);
 
 }
@@ -367,13 +351,13 @@ void	lquick_sort(t_stacks *stacks, t_dlist *a_head, t_dlist *a_last, t_dlist *b_
 		return ;
 	na_last = NULL;
 	nb_last = NULL;
-	a_pivot = a_partition(stacks, &a_head, a_last, &na_last);
+	a_pivot = a_partition(stacks, a_head, a_last, &na_last);
 
 	if (b_head == NULL)
 		b_head = stacks->b;
 	if (b_last == NULL)
 		b_last = ft_dlstlast(b_head);
-	b_pivot = b_partition(stacks, &b_head, b_last, &nb_last);
+	b_pivot = b_partition(stacks, b_head, b_last, &nb_last);
 	if (a_pivot && b_pivot)
 		lquick_sort(stacks, stacks->a, a_pivot->prev, stacks->b, b_pivot->prev);
 	else if (!b_pivot)
