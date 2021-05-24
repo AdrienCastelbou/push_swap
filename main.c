@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 15:55:39 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:14:50 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,16 +295,13 @@ void	less_or_egal_three(t_stacks *stacks)
 
 t_dlist *a_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **n_last)
 {
-	t_dlist	*replace;
 	t_dlist	*n_head;
 
 	if (!head || !last)
 		return (NULL);
-	replace = NULL;
 	n_head = NULL;
 	if (stacks->a != *head)
 	{
-		replace = stacks->a;
 		while (stacks->a != *head)
 			ft_pb(stacks);
 	}
@@ -320,9 +317,6 @@ t_dlist *a_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **
 			ft_ra(stacks);
 		}
 	}
-	if (replace)
-		while (stacks->a != replace)
-			ft_pa(stacks);
 	if (!n_head)
 		n_head = stacks->a;
 	*head = n_head;
@@ -331,16 +325,13 @@ t_dlist *a_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **
 
 t_dlist *b_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **n_last)
 {
-	t_dlist	*replace;
 	t_dlist	*n_head;
 
 	n_head = NULL;
 	if (!head || !*head || !last)
 		return (NULL);
-	replace = NULL;
 	if (stacks->b != *head)
 	{
-		replace = stacks->b;
 		while (stacks->b && stacks->b != *head)
 			ft_pa(stacks);
 	}
