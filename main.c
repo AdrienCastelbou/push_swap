@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 15:33:21 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 15:55:39 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,19 +370,27 @@ void	lquick_sort(t_stacks *stacks, t_dlist *a_head, t_dlist *a_last, t_dlist *b_
 	t_dlist	*na_last;
 	t_dlist	*nb_last;
 
-	if ((!a_head || !a_last || a_head == a_last || a_head == a_last->next) && (!b_head || !b_last || b_head == b_last || b_head == b_last->next))
+	if ((!a_head || !a_last || a_head == a_last) && (!b_head || !b_last || b_head == b_last))
+		return ;
+	if (a_last && a_head == a_last->next && b_last && b_head == b_last->next)
 		return ;
 	na_last = NULL;
 	nb_last = NULL;
-
 	a_pivot = a_partition(stacks, &a_head, a_last, &na_last);
+
 	if (b_head == NULL)
 		b_head = stacks->b;
 	if (b_last == NULL)
 		b_last = ft_dlstlast(b_head);
 	b_pivot = b_partition(stacks, &b_head, b_last, &nb_last);
-	lquick_sort(stacks, stacks->a, a_pivot->prev, stacks->b, b_pivot->prev);
-	lquick_sort(stacks, a_pivot->next, na_last, b_pivot->next, nb_last);
+	if (a_pivot && b_pivot)
+		lquick_sort(stacks, stacks->a, a_pivot->prev, stacks->b, b_pivot->prev);
+	else if (!b_pivot)
+		lquick_sort(stacks, stacks->a, a_pivot->prev, stacks->b, b_pivot);
+	if (a_pivot && b_pivot)
+		lquick_sort(stacks, a_pivot->next, na_last, b_pivot->next, nb_last);
+	else if (!b_pivot)
+		lquick_sort(stacks, a_pivot->next, na_last, b_pivot, nb_last);
 }
 
 void	set_lquick_sort(t_stacks *stacks)
