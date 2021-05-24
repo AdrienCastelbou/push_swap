@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/20 09:55:50 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 12:18:37 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ void	ft_pb(t_stacks *stacks)
 	if (!stacks->a)
 		return ;
 	elem = stacks->a->next;
+	elem->prev = NULL;
 	ft_dlstadd_front(&stacks->b, stacks->a);
 	stacks->a = elem;
 }
@@ -180,6 +181,7 @@ void	ft_pa(t_stacks *stacks)
 	if (!stacks->b)
 		return ;
 	elem = stacks->b->next;
+	elem->prev = NULL;
 	ft_dlstadd_front(&stacks->a, stacks->b);
 	stacks->b = elem;
 }
@@ -192,6 +194,7 @@ void	ft_ra(t_stacks *stacks)
 		return ;
 	elem = stacks->a;
 	stacks->a = elem->next;
+	stacks->a->prev = NULL;
 	elem->next = NULL;
 	ft_dlstadd_back(&stacks->a, elem);
 }
@@ -204,6 +207,7 @@ void	ft_rb(t_stacks *stacks)
 		return ;
 	elem = stacks->b;
 	stacks->b = elem->next;
+	stacks->b->prev = NULL;
 	elem->next = NULL;
 	ft_dlstadd_back(&stacks->b, elem);
 }
@@ -225,6 +229,7 @@ void	ft_rra(t_stacks *stacks)
 	while (elem->next->next)
 		elem = elem->next;
 	last = elem->next;
+	last->prev = NULL;
 	elem->next = NULL;
 	ft_dlstadd_front(&stacks->a, last);
 }
@@ -240,6 +245,7 @@ void	ft_rrb(t_stacks *stacks)
 	while (elem->next->next)
 		elem = elem->next;
 	last = elem->next;
+	last->prev = NULL;
 	elem->next = NULL;
 	ft_dlstadd_front(&stacks->b, last);
 }
@@ -341,6 +347,119 @@ void	set_quick_sort(t_dlist *head)
 	quick_sort(head, last);
 }
 
+t_dlist *a_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **n_last)
+{
+	t_dlist	*replace;
+	t_dlist	*n_head;
+
+	if (!head || !last)
+		return (NULL);
+	replace = NULL;
+	n_head = NULL;
+	if (stacks->a != *head)
+	{
+		replace = stacks->a;
+		while (stacks->a != *head)
+			ft_ra(stacks);
+	}
+	while (stacks->a != last)
+	{
+		if (stacks->a->nb < last->nb)
+			ft_pb(stacks);
+		else
+		{
+			if (!n_head)
+				n_head = stacks->a;
+			*n_last = stacks->a;
+			ft_ra(stacks);
+		}
+	}
+	if (!n_head)
+		n_head = stacks->a;
+	*head = n_head;
+	if (replace)
+		while (stacks->a != replace)
+			ft_ra(stacks);
+	return (last);
+}
+
+t_dlist *b_partition(t_stacks *stacks, t_dlist **head, t_dlist *last, t_dlist **n_last)
+{
+	t_dlist	*replace;
+	t_dlist	*n_head;
+
+	n_head = NULL;
+	if (!head || !last)
+		return (NULL);
+	replace = NULL;
+	if (stacks->b != *head)
+	{
+		replace = stacks->b;
+		while (stacks->b != *head)
+			ft_rb(stacks);
+	}
+	while (stacks->b != last)
+	{
+		if (stacks->b->nb > last->nb)
+			ft_pa(stacks);
+		else
+		{
+			if (!n_head)
+				n_head = stacks->b;
+			*n_last = stacks->b;
+			ft_rb(stacks);
+		}
+	}
+	if (!n_head)
+		n_head = stacks->b;
+	*head = n_head;
+	if (replace)
+		while (stacks->b != replace)
+			ft_rb(stacks);
+	return (last);
+
+}
+
+void	lquick_sort(t_stacks *stacks, t_dlist *a_head, t_dlist *a_last, t_dlist *b_head, t_dlist *b_last)
+{
+	t_dlist	*a_pivot;
+	t_dlist	*b_pivot;
+	t_dlist	*na_last;
+	t_dlist	*nb_last;
+
+	if ((!a_head || !a_last || a_head == a_last || a_head == a_last->next) && (!b_head || !b_last || b_head == b_last || b_head == b_last->next))
+		return ;
+	printf("A = %d, %d, %d\n", stacks->a->nb, a_head->nb, a_last->nb);
+	ft_show_stack(stacks->a);
+	if (stacks->b && b_head && b_last)
+		printf("///\nB= %d, %d, %d\n", stacks->b->nb, b_head->nb, b_last->nb);
+	ft_show_stack(stacks->b);
+	na_last = NULL;
+	nb_last = NULL;
+	a_pivot = a_partition(stacks, &a_head, a_last, &na_last);
+	if (b_head == NULL)
+		b_head = stacks->b;
+	if (b_last == NULL)
+		b_last = ft_dlstlast(b_head);
+	b_pivot = b_partition(stacks, &b_head, b_last, &nb_last);
+	lquick_sort(stacks, a_head, a_pivot->prev, b_head, b_pivot->prev);
+	lquick_sort(stacks, a_pivot->next, na_last, b_pivot->next, nb_last);
+}
+
+void	set_lquick_sort(t_stacks *stacks)
+{
+	t_dlist	*a_head;
+	t_dlist	*a_last;
+	t_dlist	*b_head;
+	t_dlist	*b_last;
+
+	a_head = stacks->a;
+	a_last = ft_dlstlast(a_head);
+	b_head = stacks->b;
+	b_last = ft_dlstlast(b_head);
+	lquick_sort(stacks, a_head, a_last, b_head, b_last);
+}
+
 void	run_best_algo(t_stacks *stacks)
 {
 	if (stacks->size == 1)
@@ -369,8 +488,8 @@ int		main(int ac, char **argv)
 		return (1);
 	}
 	stacks->size = ft_dlstsize(stacks->a);
+	set_lquick_sort(stacks);
 	ft_show_stack(stacks->a);
-	run_best_algo(stacks);
-	ft_show_stack(stacks->a);
+	ft_show_stack(stacks->b);
 	ft_stacksclear(stacks);
 }

@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 17:34:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/20 09:11:04 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 10:50:29 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,18 @@ void	ft_dlstclear(t_dlist **dlst, void (*del)(void *))
 	*dlst = NULL;
 }
 
+#include <stdio.h>
+
 t_dlist	*ft_dlstlast(t_dlist *dlst)
 {
+	t_dlist	*last;
+
 	if (!dlst)
 		return (NULL);
-	while (dlst->next)
-		dlst = dlst->next;
-	return (dlst);
+	last = dlst;
+	while (last->next)
+		last = last->next;
+	return (last);
 }
 
 t_dlist	*ft_dlstnew(int content)
