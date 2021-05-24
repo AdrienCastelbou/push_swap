@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 16:18:33 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 16:50:09 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,16 +300,23 @@ t_dlist *a_partition(t_stacks *stacks, t_dlist *head, t_dlist *last, t_dlist **n
 	if (stacks->a != head)
 	{
 		while (stacks->a != head)
+		{
 			ft_pb(stacks);
+			ft_putstr_fd("pb\n", STDOUT_FILENO);
+		}
 	}
 	while (stacks->a != last)
 	{
 		if (stacks->a->nb < last->nb)
+		{
 			ft_pb(stacks);
+			ft_putstr_fd("pb\n", STDOUT_FILENO);
+		}
 		else
 		{
 			*n_last = stacks->a;
 			ft_ra(stacks);
+			ft_putstr_fd("ra\n", STDOUT_FILENO);
 		}
 	}
 	return (last);
@@ -322,16 +329,23 @@ t_dlist *b_partition(t_stacks *stacks, t_dlist *head, t_dlist *last, t_dlist **n
 	if (stacks->b != head)
 	{
 		while (stacks->b && stacks->b != head)
+		{
 			ft_pa(stacks);
+			ft_putstr_fd("pa\n", STDOUT_FILENO);
+		}
 	}
 	while (stacks->b && stacks->b != last)
 	{
 		if (stacks->b->nb > last->nb)
+		{
 			ft_pa(stacks);
+			ft_putstr_fd("pa\n", STDOUT_FILENO);
+		}
 		else
 		{
 			*n_last = stacks->b;
 			ft_rb(stacks);
+			ft_putstr_fd("rb\n", STDOUT_FILENO);
 		}
 	}
 	return (last);
@@ -352,7 +366,6 @@ void	lquick_sort(t_stacks *stacks, t_dlist *a_head, t_dlist *a_last, t_dlist *b_
 	na_last = NULL;
 	nb_last = NULL;
 	a_pivot = a_partition(stacks, a_head, a_last, &na_last);
-
 	if (b_head == NULL)
 		b_head = stacks->b;
 	if (b_last == NULL)
@@ -381,7 +394,10 @@ void	set_lquick_sort(t_stacks *stacks)
 	b_last = ft_dlstlast(b_head);
 	lquick_sort(stacks, a_head, a_last, b_head, b_last);
 	if (stacks->b)
+	{
 		ft_pa(stacks);
+		ft_putstr_fd("pa\n", STDOUT_FILENO);
+	}
 }
 
 void	run_best_algo(t_stacks *stacks)
@@ -412,8 +428,8 @@ int		main(int ac, char **argv)
 		return (1);
 	}
 	stacks->size = ft_dlstsize(stacks->a);
-	ft_show_stack(stacks->a);
+	//ft_show_stack(stacks->a);
 	set_lquick_sort(stacks);
-	ft_show_stack(stacks->a);
+	//ft_show_stack(stacks->a);
 	ft_stacksclear(stacks);
 }
