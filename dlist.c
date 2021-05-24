@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 17:34:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 10:50:29 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/24 15:31:39 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@ void	ft_dlstadd_back(t_dlist **adlst, t_dlist *new)
 	elem = *adlst;
 	while (elem->next)
 		elem = elem->next;
-	elem->next = new;
-	new->prev = elem;
+	if (elem)
+		elem->next = new;
+	if (new)
+		new->prev = elem;
 }
 
 void	ft_dlstadd_front(t_dlist **adlst, t_dlist *new)
 {
+	if (adlst && *adlst)
+		(*adlst)->prev = new;
 	new->next = *adlst;
 	*adlst = new;
 }
