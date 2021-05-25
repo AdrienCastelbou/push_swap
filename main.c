@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/25 09:30:55 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/25 09:37:43 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,6 +461,26 @@ void	run_best_algo(t_stacks *stacks)
 		set_lquick_sort(stacks);
 }
 
+int		stack_is_sorted(t_dlist *a)
+{
+	t_dlist	*elem;
+	t_dlist	*to_cmp;
+
+	elem = a;
+	while (elem->next)
+	{
+		to_cmp = elem->next;
+		while (to_cmp)
+		{
+			if (elem->nb > to_cmp->nb)
+				return (0);
+			to_cmp = to_cmp->next;
+		}
+		elem = elem->next;
+	}
+	return (1);
+}
+
 int		main(int ac, char **argv)
 {
 	t_stacks	*stacks;
@@ -478,6 +498,8 @@ int		main(int ac, char **argv)
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
+	if (stack_is_sorted(stacks->a))
+		return (0);
 	stacks->size = ft_dlstsize(stacks->a);
 	set_lquick_sort(stacks);
 	//ft_show_stack(stacks->a);
