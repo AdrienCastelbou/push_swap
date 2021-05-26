@@ -6,13 +6,13 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:34:55 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 09:35:23 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:18:35 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rra(t_stacks *stacks)
+void	ft_rra(t_stacks *stacks, char *s)
 {
 	t_dlist	*last;
 	t_dlist	*elem;
@@ -26,9 +26,11 @@ void	ft_rra(t_stacks *stacks)
 	last->prev = NULL;
 	elem->next = NULL;
 	ft_dlstadd_front(&stacks->a, last);
+	if (s)
+		ft_putstr_fd(s, STDOUT_FILENO);
 }
 
-void	ft_rrb(t_stacks *stacks)
+void	ft_rrb(t_stacks *stacks, char *s)
 {
 	t_dlist	*last;
 	t_dlist	*elem;
@@ -42,10 +44,16 @@ void	ft_rrb(t_stacks *stacks)
 	last->prev = NULL;
 	elem->next = NULL;
 	ft_dlstadd_front(&stacks->b, last);
+	if (s)
+		ft_putstr_fd(s, STDOUT_FILENO);
+
 }
 
-void	ft_rrr(t_stacks *stacks)
+void	ft_rrr(t_stacks *stacks, char *s)
 {
-	ft_rrb(stacks);
-	ft_rra(stacks);
+	ft_rrb(stacks, NULL);
+	ft_rra(stacks, NULL);
+	if (s)
+		ft_putstr_fd(s, STDOUT_FILENO);
+
 }

@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 10:22:08 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:15:12 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ void	ft_dlstadd_front(t_dlist **adlst, t_dlist *new);
 void	ft_dlstadd_back(t_dlist **adlst, t_dlist *new);
 
 
-void	ft_sb(t_dlist *b);
-void	ft_sa(t_dlist *a);
-void	ft_ss(t_stacks *stacks);
-void	ft_pb(t_stacks *stacks);
-void	ft_pa(t_stacks *stacks);
-void	ft_ra(t_stacks *stacks);
-void	ft_rb(t_stacks *stacks);
-void	ft_rr(t_stacks *stacks);
-void	ft_rra(t_stacks *stacks);
-void	ft_rrb(t_stacks *stacks);
-void	ft_rrr(t_stacks *stacks);
+void	ft_sb(t_dlist *b, char *s);
+void	ft_sa(t_dlist *a, char *s);
+void	ft_ss(t_stacks *stacks, char *s);
+void	ft_pb(t_stacks *stacks, char *s);
+void	ft_pa(t_stacks *stacks, char *s);
+void	ft_ra(t_stacks *stacks, char *s);
+void	ft_rb(t_stacks *stacks, char *s);
+void	ft_rr(t_stacks *stacks, char *s);
+void	ft_rra(t_stacks *stacks, char *s);
+void	ft_rrb(t_stacks *stacks, char *s);
+void	ft_rrr(t_stacks *stacks, char *s);
 
 void	ft_show_stack(t_dlist *lst);
 void	ft_stacksclear(t_stacks *stacks);
