@@ -13,7 +13,7 @@ LIBS=	-lft
 	$(CC) $(CFLAGS) $(HEADER) -c $< -o $(<:.c=.o)
 $(NAME):	$(OBJS)
 	make bonus -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME) $(LIBS) -fsanitize=address
 all: $(NAME)
 clean:
 	rm -rf $(OBJS)

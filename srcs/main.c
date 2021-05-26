@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 15:08:34 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:15:02 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,21 @@ void	sort_less_median_b_to_a(t_stacks *stacks)
 
 void	push_more_median_a_to_b(t_stacks *stacks)
 {
-	ft_ra(stacks);
-	ft_putstr_fd("ra\n", STDOUT_FILENO);
-	while (stacks->a->nb >= stacks->median)
+	while (stacks->a->nb < stacks->median)
+	{
+		ft_ra(stacks);
+		ft_putstr_fd("ra\n", STDOUT_FILENO);
+	}
+		while (stacks->a->nb >= stacks->median)
 	{
 		ft_pb(stacks);
 		ft_putstr_fd("pb\n", STDOUT_FILENO);
 	}
+}
+
+void	sort_more_median_b_to_a(t_stacks *stacks)
+{
+	(void)stacks;
 }
 
 void	push_and_sort_more_median(t_stacks *stacks)
@@ -150,7 +158,7 @@ void	push_and_sort_more_median(t_stacks *stacks)
 	greather_nb_pos = get_nb_value(stacks->b, stacks, stacks->size - 1);
 	//while (stacks->b->nb != stacks->values[stacks->size / 2])
 	//	ft_rb(stacks);
-	//sort_less_median_b_to_a(stacks);
+	sort_more_median_b_to_a(stacks);
 }
 
 void	push_and_sort_less_median(t_stacks *stacks)
@@ -202,8 +210,8 @@ int		main(int ac, char **argv)
 		return (0);
 	stacks->size = ft_dlstsize(stacks->a);
 	second_alg(stacks);
-	ft_show_stack(stacks->a);
-	ft_show_stack(stacks->b);
+	//ft_show_stack(stacks->a);
+	//ft_show_stack(stacks->b);
 	ft_stacksclear(stacks);
 	return (0);
 }
