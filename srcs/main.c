@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 11:38:45 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 15:08:34 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	push_less_median_a_to_b(t_stacks *stacks)
 		if (stacks->a->nb < stacks->median)
 		{
 			ft_pb(stacks);
-			//ft_putstr_fd("pb\n", STDOUT_FILENO);
+			ft_putstr_fd("pb\n", STDOUT_FILENO);
 		}
 		else
 		{
 			if (!end)
 				end = stacks->a;
 			ft_ra(stacks);
-			//ft_putstr_fd("ra\n", STDOUT_FILENO);
+			ft_putstr_fd("ra\n", STDOUT_FILENO);
 		}
 	}
 }
@@ -99,18 +99,27 @@ void	sort_less_median_b_to_a(t_stacks *stacks)
 {
 	t_dlist	*less;
 
-	less = stacks->a;
+	less = NULL;
 	while (stacks->b)
 	{
-		if (stacks->a->nb > stacks->b->nb)
+		if (stacks->a->nb > stacks->b->nb &&
+				(!less || less->nb < stacks->b->nb))
 		{
 			ft_pa(stacks);
 			ft_putstr_fd("pa\n", STDOUT_FILENO);
 		}
 		else
 		{
-			while (stacks->a->nb < stacks->b->nb && (less->nb > stacks->b->nb ||
-						less->nb < stacks->a->nb))
+			if (less && less->nb > stacks->b->nb)
+			{
+				while (less->nb > stacks->b->nb)
+				{
+					less = less->prev;
+					ft_rra(stacks);
+					ft_putstr_fd("rra\n", STDOUT_FILENO);
+				}
+			}
+			while (stacks->a->nb < stacks->b->nb)
 			{
 				less = stacks->a;
 				ft_ra(stacks);
@@ -120,6 +129,30 @@ void	sort_less_median_b_to_a(t_stacks *stacks)
 	}
 }
 
+void	push_more_median_a_to_b(t_stacks *stacks)
+{
+	ft_ra(stacks);
+	ft_putstr_fd("ra\n", STDOUT_FILENO);
+	while (stacks->a->nb >= stacks->median)
+	{
+		ft_pb(stacks);
+		ft_putstr_fd("pb\n", STDOUT_FILENO);
+	}
+}
+
+void	push_and_sort_more_median(t_stacks *stacks)
+{
+	int	less_nb_pos;
+	int	greather_nb_pos;
+
+	push_more_median_a_to_b(stacks);
+	less_nb_pos = get_nb_value(stacks->b, stacks, (stacks->size / 2));
+	greather_nb_pos = get_nb_value(stacks->b, stacks, stacks->size - 1);
+	//while (stacks->b->nb != stacks->values[stacks->size / 2])
+	//	ft_rb(stacks);
+	//sort_less_median_b_to_a(stacks);
+}
+
 void	push_and_sort_less_median(t_stacks *stacks)
 {
 	int	less_nb_pos;
@@ -127,6 +160,7 @@ void	push_and_sort_less_median(t_stacks *stacks)
 
 	push_less_median_a_to_b(stacks);
 	less_nb_pos = get_nb_value(stacks->b, stacks, 0);
+	
 	greather_nb_pos = get_nb_value(stacks->b, stacks, (stacks->size / 2) - 1);
 	while (stacks->b->nb != stacks->values[0])
 		ft_rb(stacks);
@@ -143,7 +177,7 @@ void	second_alg(t_stacks *stacks)
 		if (i == 0)
 			push_and_sort_less_median(stacks);
 		else
-			;//push_and_sort_more_median(stacks);
+			push_and_sort_more_median(stacks);
 	}
 }
 
