@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:23:08 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:44:25 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,30 +161,50 @@ void	sort_more_median_b_to_a(t_stacks *stacks)
 
 void	push_and_sort_more_median(t_stacks *stacks)
 {
-	int	less_nb_pos;
-	int	greather_nb_pos;
+	int		maxi_pos;
+	void	(*fct)(t_stacks *, char *);
+	char	*s;
 
 	push_more_median_a_to_b(stacks);
-	less_nb_pos = stacks->median; 
-	greather_nb_pos = get_nb_value(stacks->b, stacks, stacks->size - 1);
+	maxi_pos = get_nb_value(stacks->b, stacks, stacks->size - 1);
+	if (maxi_pos < ft_dlstsize(stacks->b) / 2)
+	{
+		fct = ft_rb;
+		s = "rb\n";
+	}
+	else
+	{
+		fct = ft_rrb;
+		s = "rrb\n";
+	}
 	while (stacks->b->nb != stacks->values[stacks->size -1])
-		ft_rb(stacks, "rb\n");
+		fct(stacks, s);
 	sort_more_median_b_to_a(stacks);
 }
 
 void	push_and_sort_less_median(t_stacks *stacks)
 {
-	int	less_nb_pos;
-	int	greather_nb_pos;
+	int		mini_pos;
+	void	(*fct)(t_stacks *, char *);
+	char	*s;
 
 	push_less_median_a_to_b(stacks);
-	less_nb_pos = get_nb_value(stacks->b, stacks, 0);
-	
-	greather_nb_pos = get_nb_value(stacks->b, stacks, (stacks->size / 2) - 1);
+	mini_pos = get_nb_value(stacks->b, stacks, 0);
+	if (mini_pos < ft_dlstsize(stacks->b) / 2)
+	{
+		fct = ft_rb;
+		s = "rb\n";
+	}
+	else
+	{
+		fct = ft_rrb;
+		s = "rrb\n";
+	}
 	while (stacks->b->nb != stacks->values[0])
-		ft_rb(stacks, "rb\n");
+		fct(stacks, s);
 	sort_less_median_b_to_a(stacks);
 }
+
 void	second_alg(t_stacks *stacks)
 {
 	int	i;
@@ -223,8 +243,6 @@ int		main(int ac, char **argv)
 		return (0);
 	stacks->size = ft_dlstsize(stacks->a);
 	second_alg(stacks);
-	//ft_show_stack(stacks->a);
-	//ft_show_stack(stacks->b);
 	ft_stacksclear(stacks);
 	return (0);
 }
