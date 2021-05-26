@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 11:19:01 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 11:38:45 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	sort_less_median_b_to_a(t_stacks *stacks)
 		if (stacks->a->nb > stacks->b->nb)
 		{
 			ft_pa(stacks);
-			//ft_putstr_fd("pa\n", STDOUT_FILENO);
+			ft_putstr_fd("pa\n", STDOUT_FILENO);
 		}
 		else
 		{
@@ -114,7 +114,7 @@ void	sort_less_median_b_to_a(t_stacks *stacks)
 			{
 				less = stacks->a;
 				ft_ra(stacks);
-				//ft_putstr_fd("ra\n", STDOUT_FILENO);
+				ft_putstr_fd("ra\n", STDOUT_FILENO);
 			}
 		}
 	}
@@ -128,7 +128,8 @@ void	push_and_sort_less_median(t_stacks *stacks)
 	push_less_median_a_to_b(stacks);
 	less_nb_pos = get_nb_value(stacks->b, stacks, 0);
 	greather_nb_pos = get_nb_value(stacks->b, stacks, (stacks->size / 2) - 1);
-	
+	while (stacks->b->nb != stacks->values[0])
+		ft_rb(stacks);
 	sort_less_median_b_to_a(stacks);
 }
 void	second_alg(t_stacks *stacks)
