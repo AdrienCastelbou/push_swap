@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:38:43 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 09:41:11 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/26 10:22:36 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_stacksclear(t_stacks *stacks)
 		return ;
 	ft_dlstclear(&(stacks->a), free);
 	ft_dlstclear(&(stacks->b), free);
+	if (stacks->values)
+		free(stacks->values);
 	free(stacks);
 	stacks = NULL;
 }
