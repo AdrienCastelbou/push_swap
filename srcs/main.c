@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/27 11:08:15 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/27 16:52:57 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,19 @@ void	get_median(t_stacks *stacks)
 void	push_less_median_a_to_b(t_stacks *stacks)
 {
 	t_dlist	*end;
+	int		i;
+	int		stack_mid;
 
+	stack_mid = (stacks->size / 2);
+	i = 0;
 	end = NULL;
-	while (end != stacks->a)
+	while (i < stack_mid && end != stacks->a)
 	{
 		if (stacks->a->nb < stacks->median)
+		{
+			i += 1;
 			ft_pb(stacks, "pb\n");
+		}
 		else
 		{
 			if (!end)
