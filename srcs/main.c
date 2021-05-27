@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/27 10:37:51 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:50:25 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,59 +90,6 @@ int		get_nb_value(t_dlist *list, t_stacks *stacks, int pos)
 	}
 	return (i);
 }
-
-void	sort_less_median_b_to_a(t_stacks *stacks)
-{
-	t_dlist	*less;
-
-	less = NULL;
-	while (stacks->b)
-	{
-		if (stacks->a->nb > stacks->b->nb &&
-				(!less || less->nb < stacks->b->nb))
-			ft_pa(stacks, "pa\n");
-		else
-		{
-			if (less && less->nb > stacks->b->nb)
-			{
-				while (less->nb > stacks->b->nb)
-				{
-					less = less->prev;
-					ft_rra(stacks, "rra\n");
-				}
-			}
-			while (stacks->a->nb < stacks->b->nb)
-			{
-				less = stacks->a;
-				ft_ra(stacks, "ra\n");
-			}
-		}
-	}
-}
-/*
-void	push_and_sort_less_median(t_stacks *stacks)
-{
-	int		mini_pos;
-	void	(*fct)(t_stacks *, char *);
-	char	*s;
-
-	push_less_median_a_to_b(stacks);
-	mini_pos = get_nb_value(stacks->b, stacks, 0);
-	if (mini_pos < ft_dlstsize(stacks->b) / 2)
-	{
-		fct = ft_rb;
-		s = "rb\n";
-	}
-	else
-	{
-		fct = ft_rrb;
-		s = "rrb\n";
-	}
-	while (stacks->b->nb != stacks->values[0])
-		fct(stacks, s);
-	sort_less_median_b_to_a(stacks);
-}
-*/
 
 int	get_mini_pos(t_dlist *list)
 {
@@ -279,58 +226,19 @@ void	push_more_median_a_to_b(t_stacks *stacks)
 		ft_pb(stacks, "pb\n");
 }
 
-void	sort_more_median_b_to_a(t_stacks *stacks)
-{
-	t_dlist	*less;
-
-	ft_pa(stacks, "pa\n");
-	less = NULL;
-	while (stacks->b)
-	{
-		if (stacks->a->nb > stacks->b->nb &&
-				(!less || less->nb < stacks->b->nb))
-			ft_pa(stacks, "pa\n");
-		else
-		{
-			if (less && less->nb > stacks->b->nb)
-			{
-				while (less->nb > stacks->b->nb)
-				{
-					less = less->prev;
-					ft_rra(stacks, "rra\n");
-				}
-			}
-			while (stacks->a->nb < stacks->b->nb)
-			{
-				less = stacks->a;
-				ft_ra(stacks, "ra\n");
-			}
-		}
-	}
-}
-
-
 void	push_and_sort_more_median(t_stacks *stacks)
 {
-	int		maxi_pos;
-	void	(*fct)(t_stacks *, char *);
-	char	*s;
-
 	push_more_median_a_to_b(stacks);
-	maxi_pos = get_nb_value(stacks->b, stacks, stacks->size - 1);
-	if (maxi_pos < ft_dlstsize(stacks->b) / 2)
+	place_best_nb_on_top(stacks);
+	ft_pa(stacks, "pa\n");
+	while (stacks->b)
 	{
-		fct = ft_rb;
-		s = "rb\n";
+		place_best_nb_on_top(stacks);
+		if (stacks->b->nb < stacks->a->nb)
+			ft_pa(stacks, "pa\n");
+		else
+			ft_ra(stacks, "ra\n");
 	}
-	else
-	{
-		fct = ft_rrb;
-		s = "rrb\n";
-	}
-	while (stacks->b->nb != stacks->values[stacks->size -1])
-		fct(stacks, s);
-	sort_more_median_b_to_a(stacks);
 }
 
 void	second_alg(t_stacks *stacks)
