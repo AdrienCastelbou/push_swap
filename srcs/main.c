@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:44:25 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:37:51 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,157 @@ void	sort_less_median_b_to_a(t_stacks *stacks)
 		}
 	}
 }
+/*
+void	push_and_sort_less_median(t_stacks *stacks)
+{
+	int		mini_pos;
+	void	(*fct)(t_stacks *, char *);
+	char	*s;
+
+	push_less_median_a_to_b(stacks);
+	mini_pos = get_nb_value(stacks->b, stacks, 0);
+	if (mini_pos < ft_dlstsize(stacks->b) / 2)
+	{
+		fct = ft_rb;
+		s = "rb\n";
+	}
+	else
+	{
+		fct = ft_rrb;
+		s = "rrb\n";
+	}
+	while (stacks->b->nb != stacks->values[0])
+		fct(stacks, s);
+	sort_less_median_b_to_a(stacks);
+}
+*/
+
+int	get_mini_pos(t_dlist *list)
+{
+	int		i;
+	int		pos;
+
+	t_dlist	*min;
+	i = 0;
+	pos = 0;
+	min = list;
+	while (list)
+	{
+		if (min->nb > list->nb)
+		{
+			pos = i;
+			min = list;
+		}
+		i++;
+		list = list->next;
+	}
+	return (pos);
+}
+
+int	get_maxi_pos(t_dlist *list)
+{
+	int		i;
+	int		pos;
+	t_dlist	*maxi;
+
+	i = 0;
+	pos = 0;
+	maxi = list;
+	while (list)
+	{
+		if (maxi->nb < list->nb)
+		{
+			pos = i;
+			maxi = list;
+		}
+		list = list->next;
+		i++;
+	}
+	return (pos);
+}
+
+void	(*choose_best_nb(t_stacks *stacks, int *choice))
+(t_stacks *, char *s)
+{
+	int	mini_pos;
+	int	maxi_pos;
+	int	stack_size;
+
+	stack_size = ft_dlstsize(stacks->b);
+	mini_pos = get_mini_pos(stacks->b);
+	maxi_pos = get_maxi_pos(stacks->b);
+	if (mini_pos < stack_size / 2 && maxi_pos < stack_size / 2)
+	{
+		if (mini_pos < maxi_pos)
+			*choice = mini_pos;
+		else
+			*choice = maxi_pos;
+		return (&ft_rb);
+	}
+	else if (mini_pos >= stack_size / 2 && maxi_pos >= stack_size / 2)
+	{
+		if (mini_pos > maxi_pos)
+			*choice = stack_size - mini_pos;
+		else
+			*choice = stack_size - maxi_pos;
+		return (&ft_rrb);
+	}
+	else if (mini_pos < stack_size / 2 && maxi_pos >= stack_size / 2)
+	{
+		if (mini_pos < (stack_size - maxi_pos))
+		{
+			*choice = mini_pos;
+			return (&ft_rb);
+		}
+		else
+		{
+			*choice = stack_size - maxi_pos;
+			return (&ft_rrb);
+		}
+	}
+	else
+	{
+		if (maxi_pos < (stack_size - mini_pos))
+		{
+			*choice = maxi_pos;
+			return (&ft_rb);
+		}
+		else
+		{
+			*choice = stack_size - mini_pos;
+			return (&ft_rrb);
+		}
+	}
+}
+void	place_best_nb_on_top(t_stacks *stacks)
+{
+	int		mov_nb;
+	void	(*fct)(t_stacks *, char *);
+	char	*s;
+	int		i;
+
+	fct = choose_best_nb(stacks, &mov_nb);
+	if (fct == &ft_rb)
+		s = "rb\n";
+	else
+		s = "rrb\n";
+	i = -1;
+	while (++i < mov_nb)
+		fct(stacks, s);
+}
+
+void	push_and_sort_less_median(t_stacks *stacks)
+{
+	push_less_median_a_to_b(stacks);
+	while (stacks->b)
+	{
+		place_best_nb_on_top(stacks);
+		if (stacks->b->nb < stacks->a->nb)
+			ft_pa(stacks, "pa\n");
+		else
+			ft_ra(stacks, "ra\n");
+	}
+}
 
 void	push_more_median_a_to_b(t_stacks *stacks)
 {
@@ -180,29 +331,6 @@ void	push_and_sort_more_median(t_stacks *stacks)
 	while (stacks->b->nb != stacks->values[stacks->size -1])
 		fct(stacks, s);
 	sort_more_median_b_to_a(stacks);
-}
-
-void	push_and_sort_less_median(t_stacks *stacks)
-{
-	int		mini_pos;
-	void	(*fct)(t_stacks *, char *);
-	char	*s;
-
-	push_less_median_a_to_b(stacks);
-	mini_pos = get_nb_value(stacks->b, stacks, 0);
-	if (mini_pos < ft_dlstsize(stacks->b) / 2)
-	{
-		fct = ft_rb;
-		s = "rb\n";
-	}
-	else
-	{
-		fct = ft_rrb;
-		s = "rrb\n";
-	}
-	while (stacks->b->nb != stacks->values[0])
-		fct(stacks, s);
-	sort_less_median_b_to_a(stacks);
 }
 
 void	second_alg(t_stacks *stacks)
