@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/27 10:50:25 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/27 11:08:15 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,10 @@ void	push_and_sort_more_median(t_stacks *stacks)
 		if (stacks->b->nb < stacks->a->nb)
 			ft_pa(stacks, "pa\n");
 		else
+		{
 			ft_ra(stacks, "ra\n");
+			ft_pa(stacks, "pa\n");
+		}
 	}
 }
 
