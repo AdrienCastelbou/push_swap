@@ -1,7 +1,7 @@
 NAME=	push_swap
 SRCS=	main.c dlist.c check.c switch.c push.c rotate.c \
 		reverse_rotate.c stacks_utils.c utils.c select_fct.c \
-		stack_more_hundred.c
+		stack_more_hundred.c stack_less_hundred.c
 
 OBJS=	$(addprefix srcs/, $(SRCS:.c=.o))
 CC=		gcc

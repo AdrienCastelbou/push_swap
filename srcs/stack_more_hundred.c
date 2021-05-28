@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:47:54 by user42            #+#    #+#             */
-/*   Updated: 2021/05/28 14:51:14 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 15:02:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_chunk_size(int *values, int start, int end)
+int		get_chunk_size(int *values, int start, int end)
 {
 	int	i;
 	int	j;
