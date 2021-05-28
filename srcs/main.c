@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 10:39:54 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:09:32 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,9 +318,7 @@ void	push_and_sort_quart(t_stacks *stacks, int start, int end)
 		if (stacks->b->nb < stacks->a->nb)
 			ft_pa(stacks, "pa\n");
 		else
-		{
 			ft_ra(stacks, "ra\n");
-		}
 	}
 }
 
@@ -331,8 +329,17 @@ void	third_alg(t_stacks *stacks)
 	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
 	push_and_sort_quart(stacks, stacks->second_q, stacks->median);
 	push_and_sort_quart(stacks, *(stacks->values), stacks->second_q);
-	while (stacks->a->nb != *(stacks->values))
-		ft_ra(stacks, "ra\n");
+	if (get_nb_value(stacks->a, stacks, stacks->values[0]) <
+			(stacks->size / 2))
+	{
+		while (stacks->a->nb != *(stacks->values))
+			ft_ra(stacks, "ra\n");
+	}
+	else
+	{
+		while (stacks->a->nb != *(stacks->values))
+			ft_rra(stacks, "rra\n");
+	}
 }
 
 void	get_stack_infos(t_stacks *stacks)
