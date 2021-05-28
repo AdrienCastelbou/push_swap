@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 11:39:56 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:30:34 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,27 +327,46 @@ void	get_stack_infos(t_stacks *stacks)
 	get_median(stacks);
 }
 
+void	put_less_on_top(t_stacks *stacks, int n)
+{
+	if (get_nb_value(stacks->a, stacks, n) <
+			(stacks->size / 2))
+		while (stacks->a->nb != stacks->values[n])
+			ft_ra(stacks, "ra\n");
+	else
+		while (stacks->a->nb != stacks->values[n])
+			ft_rra(stacks, "rra\n");
+}
+
+void	less_or_egal_five(t_stacks *stacks)
+{
+	int	i;
+
+	i = 0;
+	while (stacks->size - i > 3)
+	{
+		put_less_on_top(stacks, i);
+		ft_pb(stacks, "pb\n");
+		i++;
+	}
+	less_or_egal_three(stacks);
+	while (stacks->b)
+		ft_pa(stacks, "pa\n");
+}
+
 void	run_best_algo(t_stacks *stacks)
 {
 	if (stacks->size == 1)
 		return ;
 	else if (stacks->size <= 3)
 		less_or_egal_three(stacks);
+	else if (stacks->size <= 5)
+		less_or_egal_five(stacks);
 	else if (stacks->size <= 100)
 		second_alg(stacks);
 	else
 		third_alg(stacks);
-	if (get_nb_value(stacks->a, stacks, 0) <
-			(stacks->size / 2))
-	{
-		while (stacks->a->nb != *(stacks->values))
-			ft_ra(stacks, "ra\n");
-	}
-	else
-	{
-		while (stacks->a->nb != *(stacks->values))
-			ft_rra(stacks, "rra\n");
-	}
+	put_less_on_top(stacks, 0);
 }
 
 int		main(int ac, char **argv)
