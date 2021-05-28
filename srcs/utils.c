@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:42:36 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:23:59 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:14:20 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,4 @@ void	less_or_egal_three(t_stacks *stacks)
 		ft_ra(stacks, "ra\n");
 	else if (first < middle && first > last) // 2-3-1
 		ft_rra(stacks, "rra\n");
-}
-
-void	run_best_algo(t_stacks *stacks)
-{
-	if (stacks->size == 1)
-		return ;
-	else if (stacks->size <= 3)
-		return (less_or_egal_three(stacks));
 }

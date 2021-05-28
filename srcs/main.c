@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 11:09:32 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:21:23 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,7 +329,25 @@ void	third_alg(t_stacks *stacks)
 	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
 	push_and_sort_quart(stacks, stacks->second_q, stacks->median);
 	push_and_sort_quart(stacks, *(stacks->values), stacks->second_q);
-	if (get_nb_value(stacks->a, stacks, stacks->values[0]) <
+}
+
+void	get_stack_infos(t_stacks *stacks)
+{
+	stacks->size = ft_dlstsize(stacks->a);
+	get_median(stacks);
+}
+
+void	run_best_algo(t_stacks *stacks)
+{
+	if (stacks->size == 1)
+		return ;
+	else if (stacks->size <= 3)
+		less_or_egal_three(stacks);
+	else if (stacks->size <= 100)
+		second_alg(stacks);
+	else
+		third_alg(stacks);
+	if (get_nb_value(stacks->a, stacks, 0) <
 			(stacks->size / 2))
 	{
 		while (stacks->a->nb != *(stacks->values))
@@ -340,12 +358,6 @@ void	third_alg(t_stacks *stacks)
 		while (stacks->a->nb != *(stacks->values))
 			ft_rra(stacks, "rra\n");
 	}
-}
-
-void	get_stack_infos(t_stacks *stacks)
-{
-	stacks->size = ft_dlstsize(stacks->a);
-	get_median(stacks);
 }
 
 int		main(int ac, char **argv)
@@ -368,8 +380,7 @@ int		main(int ac, char **argv)
 	if (stack_is_sorted(stacks->a))
 		return (0);
 	get_stack_infos(stacks);
-	//second_alg(stacks);
-	third_alg(stacks);
+	run_best_algo(stacks);
 	ft_stacksclear(stacks);
 	return (0);
 }
