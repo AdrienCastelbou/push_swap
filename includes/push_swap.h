@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:15:12 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 09:36:31 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ typedef struct	s_stacks {
 	t_dlist	*a;
 	t_dlist	*b;
 	int		size;
+	int		quart_size;
+	int		second_q;
 	int		median;
+	int		last_q;
 	int		*values;
 }				t_stacks;
 

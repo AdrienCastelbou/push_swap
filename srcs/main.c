@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/27 16:52:57 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 10:39:54 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	get_median(t_stacks *stacks)
 		elem = elem->next;
 	}
 	sort_values(stacks->size, values);
+	stacks->quart_size = stacks->size / 4;
+	stacks->second_q = values[stacks->quart_size];
 	stacks->median = values[stacks->size / 2];
+	stacks->last_q = values[stacks->quart_size * 3];
 	stacks->values = values;
 }
 
@@ -255,7 +258,6 @@ void	second_alg(t_stacks *stacks)
 {
 	int	i;
 
-	get_median(stacks);
 	i = -1;
 	while (++i < 2)
 	{
@@ -266,6 +268,77 @@ void	second_alg(t_stacks *stacks)
 	}
 	while (stacks->a->nb != stacks->values[0])
 		ft_ra(stacks, "ra\n");
+}
+
+int	get_chunk_size(int *values, int start, int end)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (values[i] < start)
+		i++;
+	j = 0;
+	while (values[i + j] != end)
+		j++;
+	return (j);
+}
+
+void push_quart_a_to_b(t_stacks *stacks, int start, int end)
+{
+	int		chunk_size;
+	int		i;
+	t_dlist	*end_lst;
+
+	chunk_size = get_chunk_size(stacks->values, start, end);
+	i = 0;
+	end_lst = NULL;
+	while (i < chunk_size && stacks->a != end_lst)
+	{
+		if (stacks->a->nb < end && stacks->a->nb >= start)
+		{
+			i += 1;
+			ft_pb(stacks, "pb\n");
+		}
+		else
+		{
+			if (!end_lst)
+				end_lst = stacks->a;
+			ft_ra(stacks, "ra\n");
+		}
+	}
+}
+
+void	push_and_sort_quart(t_stacks *stacks, int start, int end)
+{
+	push_quart_a_to_b(stacks, start, end);
+	while (stacks->b)
+	{
+		place_best_nb_on_top(stacks);
+		if (stacks->b->nb < stacks->a->nb)
+			ft_pa(stacks, "pa\n");
+		else
+		{
+			ft_ra(stacks, "ra\n");
+		}
+	}
+}
+
+
+void	third_alg(t_stacks *stacks)
+{
+	push_and_sort_quart(stacks, stacks->last_q, stacks->values[stacks->size - 1]);
+	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
+	push_and_sort_quart(stacks, stacks->second_q, stacks->median);
+	push_and_sort_quart(stacks, *(stacks->values), stacks->second_q);
+	while (stacks->a->nb != *(stacks->values))
+		ft_ra(stacks, "ra\n");
+}
+
+void	get_stack_infos(t_stacks *stacks)
+{
+	stacks->size = ft_dlstsize(stacks->a);
+	get_median(stacks);
 }
 
 int		main(int ac, char **argv)
@@ -287,8 +360,9 @@ int		main(int ac, char **argv)
 	}
 	if (stack_is_sorted(stacks->a))
 		return (0);
-	stacks->size = ft_dlstsize(stacks->a);
-	second_alg(stacks);
+	get_stack_infos(stacks);
+	//second_alg(stacks);
+	third_alg(stacks);
 	ft_stacksclear(stacks);
 	return (0);
 }
