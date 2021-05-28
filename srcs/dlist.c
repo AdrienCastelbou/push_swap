@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 17:34:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/24 15:31:39 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:09:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	ft_dlstclear(t_dlist **dlst, void (*del)(void *))
 	*dlst = NULL;
 }
 
-#include <stdio.h>
-
 t_dlist	*ft_dlstlast(t_dlist *dlst)
 {
 	t_dlist	*last;
@@ -83,7 +81,7 @@ t_dlist	*ft_dlstnew(int content)
 	return (elem);
 }
 
-int	ft_dlstsize(t_dlist *dlst)
+int		ft_dlstsize(t_dlist *dlst)
 {
 	int i;
 

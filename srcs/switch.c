@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:33:13 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:16:37 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:11:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_sa(t_dlist *a, char *s)
 	a->next->nb = temp;
 	if (s)
 		ft_putstr_fd(s, STDOUT_FILENO);
-
 }
 
 void	ft_ss(t_stacks *stacks, char *s)
@@ -46,5 +45,4 @@ void	ft_ss(t_stacks *stacks, char *s)
 	ft_sb(stacks->b, NULL);
 	if (s)
 		ft_putstr_fd(s, STDOUT_FILENO);
-
 }

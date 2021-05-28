@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:33:55 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:19:19 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:11:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_pb(t_stacks *stacks, char *s)
 {
 	t_dlist	*elem;
+
 	if (!stacks->a)
 		return ;
 	elem = stacks->a->next;
@@ -28,6 +29,7 @@ void	ft_pb(t_stacks *stacks, char *s)
 void	ft_pa(t_stacks *stacks, char *s)
 {
 	t_dlist	*elem;
+
 	if (!stacks->b)
 		return ;
 	elem = stacks->b->next;
@@ -37,5 +39,4 @@ void	ft_pa(t_stacks *stacks, char *s)
 	stacks->b = elem;
 	if (s)
 		ft_putstr_fd(s, STDOUT_FILENO);
-
 }

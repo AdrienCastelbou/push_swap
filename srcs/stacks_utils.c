@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:38:43 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 10:22:36 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:13:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_stacks	*ft_stacksnew(void)
 	return (stacks);
 }
 
-void	ft_show_stack(t_dlist *lst)
+void		ft_show_stack(t_dlist *lst)
 {
 	while (lst)
 	{
@@ -34,7 +34,7 @@ void	ft_show_stack(t_dlist *lst)
 	printf("---\n");
 }
 
-void	ft_stacksclear(t_stacks *stacks)
+void		ft_stacksclear(t_stacks *stacks)
 {
 	if (!stacks)
 		return ;

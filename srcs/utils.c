@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:42:36 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 11:14:20 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:14:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long int	ft_atoli(const char *str)
 	return (result * is_neg);
 }
 
-void	less_or_egal_three(t_stacks *stacks)
+void		less_or_egal_three(t_stacks *stacks)
 {
 	int		first;
 	int		middle;
@@ -48,17 +48,17 @@ void	less_or_egal_three(t_stacks *stacks)
 	last = ft_dlstlast(stacks->a)->nb;
 	if (first < middle && middle <= last)
 		return ;
-	if (first < middle && middle > last && last > first) //1-3-2
-		ft_sa(stacks->a, "sa\n"); // 3-1-2
-	else if (first > middle && middle > last) // 3-2-1
-		ft_sa(stacks->a, "sa\n"); //2-3-1
-	else if (middle == last || (first > middle && first < last)) // 2-1-3
+	if (first < middle && middle > last && last > first)
+		ft_sa(stacks->a, "sa\n");
+	else if (first > middle && middle > last)
+		ft_sa(stacks->a, "sa\n");
+	else if (middle == last || (first > middle && first < last))
 		ft_sa(stacks->a, "sa\n");
 	first = stacks->a->nb;
 	middle = stacks->a->next->nb;
 	last = ft_dlstlast(stacks->a)->nb;
-	if (first > middle && first > last && middle < last) // 3-1-2
+	if (first > middle && first > last && middle < last)
 		ft_ra(stacks, "ra\n");
-	else if (first < middle && first > last) // 2-3-1
+	else if (first < middle && first > last)
 		ft_rra(stacks, "rra\n");
 }

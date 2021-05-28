@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 13:37:11 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:17:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	get_median(t_stacks *stacks)
 	stacks->values = values;
 }
 
-
 void	push_less_median_a_to_b(t_stacks *stacks)
 {
 	t_dlist	*end;
@@ -94,7 +93,7 @@ int		get_nb_value(t_dlist *list, t_stacks *stacks, int pos)
 	while (list)
 	{
 		if (list->nb == stacks->values[pos])
-			break;
+			break ;
 		list = list->next;
 		i++;
 	}
@@ -105,8 +104,8 @@ int	get_mini_pos(t_dlist *list)
 {
 	int		i;
 	int		pos;
-
 	t_dlist	*min;
+
 	i = 0;
 	pos = 0;
 	min = list;
@@ -145,8 +144,7 @@ int	get_maxi_pos(t_dlist *list)
 	return (pos);
 }
 
-void	(*choose_best_nb(t_stacks *stacks, int *choice))
-(t_stacks *, char *s)
+void	(*choose_best_nb(t_stacks *stacks, int *choice)) (t_stacks *, char *s)
 {
 	int	mini_pos;
 	int	maxi_pos;
@@ -198,6 +196,7 @@ void	(*choose_best_nb(t_stacks *stacks, int *choice))
 		}
 	}
 }
+
 void	place_best_nb_on_top(t_stacks *stacks)
 {
 	int		mov_nb;
@@ -274,7 +273,7 @@ int	get_chunk_size(int *values, int start, int end)
 	return (j);
 }
 
-void push_quart_a_to_b(t_stacks *stacks, int start, int end)
+void	push_quart_a_to_b(t_stacks *stacks, int start, int end)
 {
 	int		chunk_size;
 	int		i;
@@ -312,10 +311,10 @@ void	push_and_sort_quart(t_stacks *stacks, int start, int end)
 	}
 }
 
-
 void	more_hundred(t_stacks *stacks)
 {
-	push_and_sort_quart(stacks, stacks->last_q, stacks->values[stacks->size - 1]);
+	push_and_sort_quart(stacks, stacks->last_q,
+			stacks->values[stacks->size - 1]);
 	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
 	push_and_sort_quart(stacks, stacks->second_q, stacks->median);
 	push_and_sort_quart(stacks, *(stacks->values), stacks->second_q);
@@ -375,7 +374,7 @@ int		main(int ac, char **argv)
 
 	stacks = NULL;
 	if (ac == 1)
-		return(0);
+		return (0);
 	if (!(stacks = ft_stacksnew()))
 	{
 		ft_putstr_fd("Error\n", STDERR_FILENO);
