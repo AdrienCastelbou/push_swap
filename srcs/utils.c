@@ -6,19 +6,19 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:42:36 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:39:40 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 14:45:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_stack_infos(t_stacks *stacks)
+void		get_stack_infos(t_stacks *stacks)
 {
 	stacks->size = ft_dlstsize(stacks->a);
 	get_median(stacks);
 }
 
-void	ft_switch(int *a, int *b)
+void		ft_switch(int *a, int *b)
 {
 	int c;
 
@@ -27,7 +27,7 @@ void	ft_switch(int *a, int *b)
 	*b = c;
 }
 
-void	sort_values(int size, int *values)
+void		sort_values(int size, int *values)
 {
 	int i;
 	int j;

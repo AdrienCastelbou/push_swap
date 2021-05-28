@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:37:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 14:45:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +75,8 @@ void	(*fct_for_last_cases(int *choice, int mini_pos, int maxi_pos,
 void	(*choose_best_nb(t_stacks *stacks, int *choice)) (t_stacks *, char *s);
 int	get_maxi_pos(t_dlist *list);
 int	get_mini_pos(t_dlist *list);
+
+void	get_stack_infos(t_stacks *stacks);
+void	ft_switch(int *a, int *b);
+void	sort_values(int size, int *values);
+void	get_median(t_stacks *stacks);

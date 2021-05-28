@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:41:09 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 14:43:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +262,12 @@ void	less_or_egal_five(t_stacks *stacks)
 	less_or_egal_three(stacks);
 	while (stacks->b)
 		ft_pa(stacks, "pa\n");
+}
+
+void	less_or_egal_hundred(t_stacks *stacks)
+{
+	push_and_sort_less_median(stacks);
+	push_and_sort_more_median(stacks);
 }
 
 void	run_best_algo(t_stacks *stacks)
