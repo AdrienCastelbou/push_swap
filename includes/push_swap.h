@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 15:00:54 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 15:06:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,4 @@ void	get_median(t_stacks *stacks);
 void	place_best_nb_on_top(t_stacks *stacks);
 void	more_hundred(t_stacks *stacks);
 void	less_or_egal_hundred(t_stacks *stacks);
+int		get_nb_value(t_dlist *list, t_stacks *stacks, int pos);
