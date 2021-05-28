@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:17:06 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 14:29:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,56 @@ int	get_maxi_pos(t_dlist *list)
 	return (pos);
 }
 
+void	(*fct_for_mini_maxi_less_med(int *choice, int mini_pos,
+			int maxi_pos)) (t_stacks *, char *s)
+{
+	if (mini_pos < maxi_pos)
+		*choice = mini_pos;
+	else
+		*choice = maxi_pos;
+	return (&ft_rb);
+}
+
+void	(*fct_for_mini_maxi_sup_med(int *choice, int mini_pos,
+			int maxi_pos, int stack_size)) (t_stacks *, char *s)
+{
+	if (mini_pos > maxi_pos)
+		*choice = stack_size - mini_pos;
+	else
+		*choice = stack_size - maxi_pos;
+	return (&ft_rrb);
+}
+
+void	(*fct_for_only_mini_less_med(int *choice, int mini_pos,
+			int maxi_pos, int stack_size)) (t_stacks *, char *s)
+{
+	if (mini_pos < (stack_size - maxi_pos))
+	{
+		*choice = mini_pos;
+		return (&ft_rb);
+	}
+	else
+	{
+		*choice = stack_size - maxi_pos;
+		return (&ft_rrb);
+	}
+}
+
+void	(*fct_for_last_cases(int *choice, int mini_pos, int maxi_pos,
+			int stack_size)) (t_stacks *, char *s)
+{
+	if (maxi_pos < (stack_size - mini_pos))
+	{
+		*choice = maxi_pos;
+		return (&ft_rb);
+	}
+	else
+	{
+		*choice = stack_size - mini_pos;
+		return (&ft_rrb);
+	}
+}
+
 void	(*choose_best_nb(t_stacks *stacks, int *choice)) (t_stacks *, char *s)
 {
 	int	mini_pos;
@@ -154,47 +204,16 @@ void	(*choose_best_nb(t_stacks *stacks, int *choice)) (t_stacks *, char *s)
 	mini_pos = get_mini_pos(stacks->b);
 	maxi_pos = get_maxi_pos(stacks->b);
 	if (mini_pos < stack_size / 2 && maxi_pos < stack_size / 2)
-	{
-		if (mini_pos < maxi_pos)
-			*choice = mini_pos;
-		else
-			*choice = maxi_pos;
-		return (&ft_rb);
-	}
+		return (fct_for_mini_maxi_less_med(choice, mini_pos, maxi_pos));
 	else if (mini_pos >= stack_size / 2 && maxi_pos >= stack_size / 2)
-	{
-		if (mini_pos > maxi_pos)
-			*choice = stack_size - mini_pos;
-		else
-			*choice = stack_size - maxi_pos;
-		return (&ft_rrb);
-	}
+		return (fct_for_mini_maxi_sup_med(choice, mini_pos,
+					maxi_pos, stack_size));
 	else if (mini_pos < stack_size / 2 && maxi_pos >= stack_size / 2)
-	{
-		if (mini_pos < (stack_size - maxi_pos))
-		{
-			*choice = mini_pos;
-			return (&ft_rb);
-		}
-		else
-		{
-			*choice = stack_size - maxi_pos;
-			return (&ft_rrb);
-		}
-	}
+		return (fct_for_only_mini_less_med(choice, mini_pos,
+					maxi_pos, stack_size));
 	else
-	{
-		if (maxi_pos < (stack_size - mini_pos))
-		{
-			*choice = maxi_pos;
-			return (&ft_rb);
-		}
-		else
-		{
-			*choice = stack_size - mini_pos;
-			return (&ft_rrb);
-		}
-	}
+		return (fct_for_last_cases(choice, mini_pos,
+					maxi_pos, stack_size));
 }
 
 void	place_best_nb_on_top(t_stacks *stacks)
