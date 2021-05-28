@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 17:34:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:09:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 15:16:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,4 @@ t_dlist	*ft_dlstlast(t_dlist *dlst)
 	while (last->next)
 		last = last->next;
 	return (last);
-}
-
-t_dlist	*ft_dlstnew(int content)
-{
-	t_dlist	*elem;
-
-	if (!(elem = (t_dlist*)malloc(sizeof(t_dlist))))
-		return (NULL);
-	elem->nb = content;
-	elem->next = NULL;
-	elem->prev = NULL;
-	return (elem);
-}
-
-int		ft_dlstsize(t_dlist *dlst)
-{
-	int i;
-
-	i = 0;
-	while (dlst && ++i)
-		dlst = dlst->next;
-	return (i);
 }
