@@ -6,36 +6,12 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:29:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 14:41:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-void	ft_switch(int *a, int *b)
-{
-	int c;
-
-	c = *a;
-	*a = *b;
-	*b = c;
-}
-
-void	sort_values(int size, int *values)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (++i < size - 1)
-	{
-		j = i;
-		while (++j < size)
-			if (values[i] > values[j])
-				ft_switch(values + i, values + j);
-	}
-}
 
 void	get_median(t_stacks *stacks)
 {
@@ -144,78 +120,6 @@ int	get_maxi_pos(t_dlist *list)
 	return (pos);
 }
 
-void	(*fct_for_mini_maxi_less_med(int *choice, int mini_pos,
-			int maxi_pos)) (t_stacks *, char *s)
-{
-	if (mini_pos < maxi_pos)
-		*choice = mini_pos;
-	else
-		*choice = maxi_pos;
-	return (&ft_rb);
-}
-
-void	(*fct_for_mini_maxi_sup_med(int *choice, int mini_pos,
-			int maxi_pos, int stack_size)) (t_stacks *, char *s)
-{
-	if (mini_pos > maxi_pos)
-		*choice = stack_size - mini_pos;
-	else
-		*choice = stack_size - maxi_pos;
-	return (&ft_rrb);
-}
-
-void	(*fct_for_only_mini_less_med(int *choice, int mini_pos,
-			int maxi_pos, int stack_size)) (t_stacks *, char *s)
-{
-	if (mini_pos < (stack_size - maxi_pos))
-	{
-		*choice = mini_pos;
-		return (&ft_rb);
-	}
-	else
-	{
-		*choice = stack_size - maxi_pos;
-		return (&ft_rrb);
-	}
-}
-
-void	(*fct_for_last_cases(int *choice, int mini_pos, int maxi_pos,
-			int stack_size)) (t_stacks *, char *s)
-{
-	if (maxi_pos < (stack_size - mini_pos))
-	{
-		*choice = maxi_pos;
-		return (&ft_rb);
-	}
-	else
-	{
-		*choice = stack_size - mini_pos;
-		return (&ft_rrb);
-	}
-}
-
-void	(*choose_best_nb(t_stacks *stacks, int *choice)) (t_stacks *, char *s)
-{
-	int	mini_pos;
-	int	maxi_pos;
-	int	stack_size;
-
-	stack_size = ft_dlstsize(stacks->b);
-	mini_pos = get_mini_pos(stacks->b);
-	maxi_pos = get_maxi_pos(stacks->b);
-	if (mini_pos < stack_size / 2 && maxi_pos < stack_size / 2)
-		return (fct_for_mini_maxi_less_med(choice, mini_pos, maxi_pos));
-	else if (mini_pos >= stack_size / 2 && maxi_pos >= stack_size / 2)
-		return (fct_for_mini_maxi_sup_med(choice, mini_pos,
-					maxi_pos, stack_size));
-	else if (mini_pos < stack_size / 2 && maxi_pos >= stack_size / 2)
-		return (fct_for_only_mini_less_med(choice, mini_pos,
-					maxi_pos, stack_size));
-	else
-		return (fct_for_last_cases(choice, mini_pos,
-					maxi_pos, stack_size));
-}
-
 void	place_best_nb_on_top(t_stacks *stacks)
 {
 	int		mov_nb;
@@ -270,12 +174,6 @@ void	push_and_sort_more_median(t_stacks *stacks)
 			ft_pa(stacks, "pa\n");
 		}
 	}
-}
-
-void	less_or_egal_hundred(t_stacks *stacks)
-{
-	push_and_sort_less_median(stacks);
-	push_and_sort_more_median(stacks);
 }
 
 int	get_chunk_size(int *values, int start, int end)
@@ -337,12 +235,6 @@ void	more_hundred(t_stacks *stacks)
 	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
 	push_and_sort_quart(stacks, stacks->second_q, stacks->median);
 	push_and_sort_quart(stacks, *(stacks->values), stacks->second_q);
-}
-
-void	get_stack_infos(t_stacks *stacks)
-{
-	stacks->size = ft_dlstsize(stacks->a);
-	get_median(stacks);
 }
 
 void	put_less_on_top(t_stacks *stacks, int n)

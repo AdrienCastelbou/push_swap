@@ -6,11 +6,41 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:42:36 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:14:28 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/28 14:39:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	get_stack_infos(t_stacks *stacks)
+{
+	stacks->size = ft_dlstsize(stacks->a);
+	get_median(stacks);
+}
+
+void	ft_switch(int *a, int *b)
+{
+	int c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+
+void	sort_values(int size, int *values)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < size - 1)
+	{
+		j = i;
+		while (++j < size)
+			if (values[i] > values[j])
+				ft_switch(values + i, values + j);
+	}
+}
 
 long int	ft_atoli(const char *str)
 {

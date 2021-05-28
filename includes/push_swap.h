@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 09:36:31 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 14:37:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,14 @@ void	ft_stacksclear(t_stacks *stacks);
 t_stacks	*ft_stacksnew(void);
 void	less_or_egal_three(t_stacks *stacks);
 void	run_best_algo(t_stacks *stacks);
+void	(*fct_for_mini_maxi_less_med(int *choice, int mini_pos,
+			int maxi_pos)) (t_stacks *, char *s);
+void	(*fct_for_mini_maxi_sup_med(int *choice, int mini_pos,
+			int maxi_pos, int stack_size)) (t_stacks *, char *s);
+void	(*fct_for_only_mini_less_med(int *choice, int mini_pos,
+			int maxi_pos, int stack_size)) (t_stacks *, char *s);
+void	(*fct_for_last_cases(int *choice, int mini_pos, int maxi_pos,
+			int stack_size)) (t_stacks *, char *s);
+void	(*choose_best_nb(t_stacks *stacks, int *choice)) (t_stacks *, char *s);
+int	get_maxi_pos(t_dlist *list);
+int	get_mini_pos(t_dlist *list);
