@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 11:21:23 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 11:39:56 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,18 +256,8 @@ void	push_and_sort_more_median(t_stacks *stacks)
 
 void	second_alg(t_stacks *stacks)
 {
-	int	i;
-
-	i = -1;
-	while (++i < 2)
-	{
-		if (i == 0)
-			push_and_sort_less_median(stacks);
-		else
-			push_and_sort_more_median(stacks);
-	}
-	while (stacks->a->nb != stacks->values[0])
-		ft_ra(stacks, "ra\n");
+	push_and_sort_less_median(stacks);
+	push_and_sort_more_median(stacks);
 }
 
 int	get_chunk_size(int *values, int start, int end)
