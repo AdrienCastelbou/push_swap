@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 13:30:34 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:37:11 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ void	push_and_sort_more_median(t_stacks *stacks)
 	}
 }
 
-void	second_alg(t_stacks *stacks)
+void	less_or_egal_hundred(t_stacks *stacks)
 {
 	push_and_sort_less_median(stacks);
 	push_and_sort_more_median(stacks);
@@ -313,7 +313,7 @@ void	push_and_sort_quart(t_stacks *stacks, int start, int end)
 }
 
 
-void	third_alg(t_stacks *stacks)
+void	more_hundred(t_stacks *stacks)
 {
 	push_and_sort_quart(stacks, stacks->last_q, stacks->values[stacks->size - 1]);
 	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
@@ -363,9 +363,9 @@ void	run_best_algo(t_stacks *stacks)
 	else if (stacks->size <= 5)
 		less_or_egal_five(stacks);
 	else if (stacks->size <= 100)
-		second_alg(stacks);
+		less_or_egal_hundred(stacks);
 	else
-		third_alg(stacks);
+		more_hundred(stacks);
 	put_less_on_top(stacks, 0);
 }
 
