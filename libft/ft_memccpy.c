@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 14:38:50 by acastelb          #+#    #+#             */
-/*   Updated: 2020/11/19 11:37:20 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/28 13:43:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	{
 		s_dst[i] = s_src[i];
 		if (s_src[i] == (char)c)
-			return (&dst[i + 1]);
+			return (dst + i + 1);
 	}
 	return (NULL);
 }
