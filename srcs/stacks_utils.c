@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:38:43 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:13:15 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/29 11:12:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_stacks	*ft_stacksnew(void)
 		return (NULL);
 	stacks->a = NULL;
 	stacks->b = NULL;
+	stacks->values = NULL;
 	return (stacks);
 }
 
@@ -38,8 +39,10 @@ void		ft_stacksclear(t_stacks *stacks)
 {
 	if (!stacks)
 		return ;
-	ft_dlstclear(&(stacks->a), free);
-	ft_dlstclear(&(stacks->b), free);
+	if (stacks->a)
+		ft_dlstclear(&(stacks->a), free);
+	if (stacks->b)
+		ft_dlstclear(&(stacks->b), free);
 	if (stacks->values)
 		free(stacks->values);
 	free(stacks);

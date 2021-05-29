@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 15:06:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/29 11:14:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	run_best_algo(t_stacks *stacks)
 {
 	if (stacks->size == 1)
 		return ;
+	if (stack_is_sorted(stacks->a))
+		return ;
 	else if (stacks->size <= 3)
 		less_or_egal_three(stacks);
 	else if (stacks->size <= 5)
@@ -71,8 +73,6 @@ int		main(int ac, char **argv)
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
-	if (stack_is_sorted(stacks->a))
-		return (0);
 	get_stack_infos(stacks);
 	run_best_algo(stacks);
 	ft_stacksclear(stacks);
