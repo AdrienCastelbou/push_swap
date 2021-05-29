@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:03:36 by user42            #+#    #+#             */
-/*   Updated: 2021/05/28 15:07:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/29 09:44:30 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ void	place_best_nb_on_top(t_stacks *stacks)
 	char	*s;
 	int		i;
 
-	fct = choose_best_nb(stacks, &mov_nb);
+	if (choose_best_nb(stacks, &mov_nb))
+		fct = ft_rb;
+	else
+		fct = ft_rrb;
 	if (fct == &ft_rb)
 		s = "rb\n";
 	else
