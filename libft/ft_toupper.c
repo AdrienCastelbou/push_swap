@@ -6,11 +6,13 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 15:09:00 by acastelb          #+#    #+#             */
-/*   Updated: 2020/11/05 15:09:07 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:47:32 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
-	return ((c >= 97 && c <= 122) ? c - 32 : c);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 14:57:47 by acastelb          #+#    #+#             */
-/*   Updated: 2020/11/18 14:10:11 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:38:59 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 == NULL || !s2)
 		return (NULL);
-	if (!(str = (char *)malloc(sizeof(char) *
-					(ft_strlen(s1) + ft_strlen(s2) + 1))))
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!(str))
 		return (NULL);
 	i = 0;
 	while (*s1)

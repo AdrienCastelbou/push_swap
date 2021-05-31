@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 15:06:07 by acastelb          #+#    #+#             */
-/*   Updated: 2020/11/16 16:48:16 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:45:03 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_trim_end(const char *s, int len, const char *set)
 	return (trim_count);
 }
 
-char		*ft_strtrim(char const *s, char const *set)
+char	*ft_strtrim(char const *s, char const *set)
 {
 	char	*str;
 	int		len;
@@ -48,7 +48,8 @@ char		*ft_strtrim(char const *s, char const *set)
 	len = len - ft_trim_start(s, set) - ft_trim_end(s, len, set);
 	if (len < 0)
 		len = 0;
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(str))
 		return (NULL);
 	while (ft_strchr(set, *s))
 		s++;

@@ -6,11 +6,13 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 15:08:39 by acastelb          #+#    #+#             */
-/*   Updated: 2020/11/05 15:08:48 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:47:02 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
-	return ((c >= 65 && c <= 90) ? c + 32 : c);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }
