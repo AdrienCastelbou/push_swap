@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/29 09:49:19 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:49:59 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 # include "libft.h"
 # include <limits.h>
 
-typedef struct	s_dlist {
+typedef struct s_dlist {
 	int				nb;
 	struct s_dlist	*next;
 	struct s_dlist	*prev;
 }				t_dlist;
 
-typedef struct	s_stacks {
+typedef struct s_stacks {
 	t_dlist			*a;
 	t_dlist			*b;
 	int				size;
@@ -63,13 +63,13 @@ t_stacks		*ft_stacksnew(void);
 void			less_or_egal_three(t_stacks *stacks);
 void			run_best_algo(t_stacks *stacks);
 int				fct_for_mini_maxi_less_med(int *choice, int mini_pos,
-				int maxi_pos);
+					int maxi_pos);
 int				fct_for_mini_maxi_sup_med(int *choice, int mini_pos,
-				int maxi_pos, int stack_size);
+					int maxi_pos, int stack_size);
 int				fct_for_only_mini_less_med(int *choice, int mini_pos,
-				int maxi_pos, int stack_size);
+					int maxi_pos, int stack_size);
 int				fct_for_last_cases(int *choice, int mini_pos,
-				int maxi_pos, int stack_size);
+					int maxi_pos, int stack_size);
 int				choose_best_nb(t_stacks *stacks, int *choice);
 int				get_maxi_pos(t_dlist *list);
 int				get_mini_pos(t_dlist *list);
