@@ -6,13 +6,12 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:33:13 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 15:54:34 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 11:14:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-#include <stdio.h>
 
 void	ft_sb(t_dlist *b, char *s)
 {

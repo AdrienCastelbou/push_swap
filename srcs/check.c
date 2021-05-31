@@ -6,12 +6,11 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:27:33 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/31 10:51:24 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 11:14:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	nb_is_duplicate(t_dlist *a, int nb)
 {
