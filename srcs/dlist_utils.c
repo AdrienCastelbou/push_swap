@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:15:53 by user42            #+#    #+#             */
-/*   Updated: 2021/05/28 15:16:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:53:22 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_dlist	*ft_dlstnew(int content)
 {
 	t_dlist	*elem;
 
-	if (!(elem = (t_dlist*)malloc(sizeof(t_dlist))))
+	elem = (t_dlist *)malloc(sizeof(t_dlist));
+	if (!(elem))
 		return (NULL);
 	elem->nb = content;
 	elem->next = NULL;
@@ -24,9 +25,9 @@ t_dlist	*ft_dlstnew(int content)
 	return (elem);
 }
 
-int		ft_dlstsize(t_dlist *dlst)
+int	ft_dlstsize(t_dlist *dlst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (dlst && ++i)

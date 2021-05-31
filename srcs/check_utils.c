@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:11:45 by user42            #+#    #+#             */
-/*   Updated: 2021/05/28 15:12:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:52:08 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		check_nb_validity(t_stacks *stacks, char *str, int i)
+int	check_nb_validity(t_stacks *stacks, char *str, int i)
 {
 	if (!str[i] && !stacks->a)
 		return (0);
@@ -23,14 +23,15 @@ int		check_nb_validity(t_stacks *stacks, char *str, int i)
 	return (1);
 }
 
-int		check_and_add_nb(t_stacks *stacks, int nb)
+int	check_and_add_nb(t_stacks *stacks, int nb)
 {
-	t_dlist *elem;
+	t_dlist	*elem;
 
 	elem = NULL;
 	if (nb < INT_MIN || nb > INT_MAX || nb_is_duplicate(stacks->a, nb))
 		return (0);
-	if (!(elem = ft_dlstnew(nb)))
+	elem = ft_dlstnew(nb);
+	if (!(elem))
 		return (0);
 	ft_dlstadd_back(&(stacks->a), elem);
 	return (1);

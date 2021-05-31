@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:38:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/29 11:14:59 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:54:18 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	put_less_on_top(t_stacks *stacks, int n)
 {
-	if (get_nb_value(stacks->a, stacks, n) <
-			(stacks->size / 2))
+	if (get_nb_value(stacks->a, stacks, n) < (stacks->size / 2))
 		while (stacks->a->nb != stacks->values[n])
 			ft_ra(stacks, "ra\n");
 	else
@@ -56,14 +55,15 @@ void	run_best_algo(t_stacks *stacks)
 	put_less_on_top(stacks, 0);
 }
 
-int		main(int ac, char **argv)
+int	main(int ac, char **argv)
 {
 	t_stacks	*stacks;
 
 	stacks = NULL;
 	if (ac == 1)
 		return (0);
-	if (!(stacks = ft_stacksnew()))
+	stacks = ft_stacksnew();
+	if (!(stacks))
 	{
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);

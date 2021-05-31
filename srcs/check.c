@@ -6,14 +6,14 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:27:33 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 15:13:23 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:51:24 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-int		nb_is_duplicate(t_dlist *a, int nb)
+int	nb_is_duplicate(t_dlist *a, int nb)
 {
 	while (a)
 	{
@@ -24,9 +24,9 @@ int		nb_is_duplicate(t_dlist *a, int nb)
 	return (0);
 }
 
-int		is_numeric_value(char *str)
+int	is_numeric_value(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] && !ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
@@ -38,7 +38,7 @@ int		is_numeric_value(char *str)
 	return (1);
 }
 
-int		stack_is_sorted(t_dlist *a)
+int	stack_is_sorted(t_dlist *a)
 {
 	t_dlist	*elem;
 	t_dlist	*to_cmp;
@@ -58,7 +58,7 @@ int		stack_is_sorted(t_dlist *a)
 	return (1);
 }
 
-int		check_argvs(t_stacks *stacks, char **av)
+int	check_argvs(t_stacks *stacks, char **av)
 {
 	int	i;
 	int	ret;
@@ -76,7 +76,7 @@ int		check_argvs(t_stacks *stacks, char **av)
 	return (ret);
 }
 
-int		get_av_elem(t_stacks *stacks, char *str)
+int	get_av_elem(t_stacks *stacks, char *str)
 {
 	long int	nb;
 	int			i;

@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 17:34:02 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/29 11:06:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:52:22 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_dlstadd_back(t_dlist **adlst, t_dlist *new)
 {
-	t_dlist *elem;
+	t_dlist	*elem;
 
 	if (!adlst)
 		return ;

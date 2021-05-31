@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:47:54 by user42            #+#    #+#             */
-/*   Updated: 2021/05/28 15:02:00 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:56:47 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		get_chunk_size(int *values, int start, int end)
+int	get_chunk_size(int *values, int start, int end)
 {
 	int	i;
 	int	j;
@@ -67,7 +67,7 @@ void	push_and_sort_quart(t_stacks *stacks, int start, int end)
 void	more_hundred(t_stacks *stacks)
 {
 	push_and_sort_quart(stacks, stacks->last_q,
-			stacks->values[stacks->size - 1]);
+		stacks->values[stacks->size - 1]);
 	push_and_sort_quart(stacks, stacks->median, stacks->last_q);
 	push_and_sort_quart(stacks, stacks->second_q, stacks->median);
 	push_and_sort_quart(stacks, *(stacks->values), stacks->second_q);

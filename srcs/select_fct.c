@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 14:31:16 by user42            #+#    #+#             */
-/*   Updated: 2021/05/29 09:46:23 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:55:15 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int	choose_best_nb(t_stacks *stacks, int *choice)
 		return (fct_for_mini_maxi_less_med(choice, mini_pos, maxi_pos));
 	else if (mini_pos >= stack_size / 2 && maxi_pos >= stack_size / 2)
 		return (fct_for_mini_maxi_sup_med(choice, mini_pos,
-					maxi_pos, stack_size));
+				maxi_pos, stack_size));
 	else if (mini_pos < stack_size / 2 && maxi_pos >= stack_size / 2)
 		return (fct_for_only_mini_less_med(choice, mini_pos,
-					maxi_pos, stack_size));
+				maxi_pos, stack_size));
 	else
 		return (fct_for_last_cases(choice, mini_pos,
-					maxi_pos, stack_size));
+				maxi_pos, stack_size));
 }

@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:38:43 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/29 11:12:47 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:57:26 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_stacks	*ft_stacksnew(void)
 {
 	t_stacks	*stacks;
 
-	if (!(stacks = malloc(sizeof(t_stacks))))
+	stacks = malloc(sizeof(t_stacks));
+	if (!(stacks))
 		return (NULL);
 	stacks->a = NULL;
 	stacks->b = NULL;
@@ -25,7 +26,7 @@ t_stacks	*ft_stacksnew(void)
 	return (stacks);
 }
 
-void		ft_show_stack(t_dlist *lst)
+void	ft_show_stack(t_dlist *lst)
 {
 	while (lst)
 	{
@@ -35,7 +36,7 @@ void		ft_show_stack(t_dlist *lst)
 	printf("---\n");
 }
 
-void		ft_stacksclear(t_stacks *stacks)
+void	ft_stacksclear(t_stacks *stacks)
 {
 	if (!stacks)
 		return ;

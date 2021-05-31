@@ -6,31 +6,31 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:42:36 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/28 14:45:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/31 10:58:09 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		get_stack_infos(t_stacks *stacks)
+void	get_stack_infos(t_stacks *stacks)
 {
 	stacks->size = ft_dlstsize(stacks->a);
 	get_median(stacks);
 }
 
-void		ft_switch(int *a, int *b)
+void	ft_switch(int *a, int *b)
 {
-	int c;
+	int	c;
 
 	c = *a;
 	*a = *b;
 	*b = c;
 }
 
-void		sort_values(int size, int *values)
+void	sort_values(int size, int *values)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < size - 1)
@@ -67,7 +67,7 @@ long int	ft_atoli(const char *str)
 	return (result * is_neg);
 }
 
-void		less_or_egal_three(t_stacks *stacks)
+void	less_or_egal_three(t_stacks *stacks)
 {
 	int		first;
 	int		middle;

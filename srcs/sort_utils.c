@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:03:36 by user42            #+#    #+#             */
-/*   Updated: 2021/05/29 09:44:30 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:56:26 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	get_median(t_stacks *stacks)
 	int		i;
 	t_dlist	*elem;
 
-	if (!(values = malloc(sizeof(int) * stacks->size)))
+	values = malloc(sizeof(int) * stacks->size);
+	if (!(values))
 		return ;
 	elem = stacks->a;
 	i = -1;
@@ -35,9 +36,9 @@ void	get_median(t_stacks *stacks)
 	stacks->values = values;
 }
 
-int		get_nb_value(t_dlist *list, t_stacks *stacks, int pos)
+int	get_nb_value(t_dlist *list, t_stacks *stacks, int pos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (list)
@@ -50,7 +51,7 @@ int		get_nb_value(t_dlist *list, t_stacks *stacks, int pos)
 	return (i);
 }
 
-int		get_mini_pos(t_dlist *list)
+int	get_mini_pos(t_dlist *list)
 {
 	int		i;
 	int		pos;
@@ -72,7 +73,7 @@ int		get_mini_pos(t_dlist *list)
 	return (pos);
 }
 
-int		get_maxi_pos(t_dlist *list)
+int	get_maxi_pos(t_dlist *list)
 {
 	int		i;
 	int		pos;

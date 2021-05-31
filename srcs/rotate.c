@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 09:34:26 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/26 17:17:41 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/05/31 10:54:36 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_ra(t_stacks *stacks, char *s)
 {
-	t_dlist *elem;
+	t_dlist	*elem;
 
 	if (!stacks->a || !stacks->a->next)
 		return ;
@@ -29,7 +29,7 @@ void	ft_ra(t_stacks *stacks, char *s)
 
 void	ft_rb(t_stacks *stacks, char *s)
 {
-	t_dlist *elem;
+	t_dlist	*elem;
 
 	if (!stacks->b || !stacks->b->next)
 		return ;
