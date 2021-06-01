@@ -6,7 +6,7 @@
 /*   By: acastelb <acastelb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 10:52:14 by acastelb          #+#    #+#             */
-/*   Updated: 2021/05/31 11:13:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/06/01 08:59:20 by acastelb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void			more_hundred(t_stacks *stacks);
 void			less_or_egal_hundred(t_stacks *stacks);
 int				get_nb_value(t_dlist *list, t_stacks *stacks, int pos);
 int				check_nb_validity(t_stacks *stacks, char *str, int i);
-int				check_and_add_nb(t_stacks *stacks, int nb);
+int				check_and_add_nb(t_stacks *stacks, long int nb);
 #endif
