@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:11:45 by user42            #+#    #+#             */
-/*   Updated: 2021/06/01 09:06:05 by acastelb         ###   ########.fr       */
+/*   Updated: 2021/06/12 09:53:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_nb_validity(t_stacks *stacks, char *str, int i)
 		return (0);
 	if (str[i] && !ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
 		return (0);
-	while (str[i] == '+' || str[i] == '-')
+	while (str[i] == '+' || str[i] == '-' || str[i] == '0')
 		i++;
 	while (ft_isdigit(str[i + j]))
 		j++;
